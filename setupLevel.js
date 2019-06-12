@@ -18,7 +18,7 @@ function setup(level){
 			clearInterval(a);
 		}		
 	}, 10)
-
-	
 	
 }
+
+setup(0);
