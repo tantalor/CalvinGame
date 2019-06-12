@@ -21,3 +21,6 @@ function setup(level){
 	}, 10)
 	
 }
+
+
+setup(0);
