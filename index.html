@@ -7,9 +7,15 @@
 </head>
 <body>
 
-<canvas id="myCanvas" width="480" height="320"></canvas>
+<canvas id="floorCanvas" width="480" height="320" style="position: absolute; left: 50; top: 50; z-index: 0; background:transparent" border="1"></canvas>
 
-<script src="moveguy.js"></script>
+<canvas id="guyCanvas" width="480" height="320" style="position: absolute; left: 50; top: 50; z-index: 0; background:transparent"></canvas>
+
+
+<script src="levels.js"></script>
+<script src="background.js"></script>
+<script src="guy.js"></script>
+<script src="setupLevel.js"></script>
 
 </body>
 </html>
