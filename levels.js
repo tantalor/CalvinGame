@@ -6,5 +6,6 @@ levels=[
 		frames:0,
 		theta:0,
 		flagX:140,
-		flagY:100}
+		flagY:100,
+		portals:[{color:"red",portalX:[10,90],portalY:[100,160],theta:[Math.PI/4,-Math.PI/4]}]}
 ]

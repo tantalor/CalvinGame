@@ -9,9 +9,10 @@ function setup(level){
 	var guyCanvas=document.getElementById("guyCanvas");
 	var guyctx=guyCanvas.getContext("2d");
 	var solved=false;
+	var upWait=false;
 			
 	var a=setInterval(function(){
-		[guyX,guyY,guyTheta,fallingFrames]=move(levels[level].floor,guyX,guyY,guyTheta,fallingFrames,guyctx,guyCanvas);
+		[guyX,guyY,guyTheta,fallingFrames,upWait]=move(levels[level].floor,guyX,guyY,guyTheta,fallingFrames,guyctx,guyCanvas,levels[level].portals,upWait);
 		solved=checkFlag(guyX,guyY,levels[level].flagX,levels[level].flagY);
 		if(solved){
 			alert("You are the winner");
@@ -20,5 +21,3 @@ function setup(level){
 	}, 10)
 	
 }
-
-setup(0);
