@@ -44,6 +44,20 @@ levels=[
 		flagX:160,
 		flagY:200,
 		flagTheta:0,
-		portals:[{color:"red",x:[60,130],y:[200,200],theta:[0,0]}]}
+		portals:[{color:"red",x:[60,130],y:[200,200],theta:[0,0]}]},
+		
+		{alertText:"You can flip the world upside down.",
+			floor: [{x:60,y:200,width:40,theta:0,type:"floor"},
+				{x:98,y:200,width:30,theta:0,type:"flip"},
+				{x:43,y:100,width:75,theta:0,type:"floor"},
+				{x:20,y:100,width:25,theta:0,type:"flip"},
+				{x:0,y:200,width:50,theta:0,type:"floor"}],
+			x:65,
+			y:190,
+			theta:0,
+			flagX:10,
+			flagY:200,
+			flagTheta:0,
+			portals:[]}
 			
 ]

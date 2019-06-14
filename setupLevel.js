@@ -29,10 +29,11 @@ function setup(level){
 	
 	var solved=false;
 	var upWait=false;
+	var flipWait=false;
 			
 	var a=setInterval(function(){
-		[___, upWait, gravity]=move(level,guy,upWait,gravity);
-		solved=checkFlag(guy,level);
+		[___, upWait, flipWait,gravity]=move(level,guy,upWait,flipWait,gravity);
+		solved=checkFlag(guy,level,gravity);
 		if(solved){
 			clearInterval(a);
 			

@@ -21,47 +21,64 @@ function keyUpHandler(e){
 	pressed=N;
 }
 
-function move(level, guy, upWait, gravity){
+function move(level, guy, upWait, flipWait, gravity){
 	if(pressed==U){
+		flipWait=false;
 		if(!upWait){
-			return checkPortal(level,guy,upWait,gravity);
+			return checkPortal(level,guy,upWait, flipWait, gravity);
 		}else{
-			return [guy, true, gravity];
+			return [guy, true, flipWait, gravity];
 		}
 	}else{
 		if(pressed==R){
 			guy.x+=1;
+			flipWait=false;
 		}else if(pressed==L){
 			guy.x-=1;
+			flipWait=false;
 		}
 		
 		upWait=false;
-		return makeMove(level, guy, upWait, gravity)
+		return makeMove(level, guy, upWait, flipWait, gravity)
 	}
 }
 
 
 
 
-function makeMove(level, guy, upWait, gravity){
+function makeMove(level, guy, upWait, flipWait, gravity){
 	var safe=false;
 	
 	for(f of levels[level].floor){
-		if(guy.x<f.width*cos(f.theta)+f.x-1
+		if(guy.x<f.width*cos(gravity*f.theta)+f.x-1
 			&& guy.x>f.x-1
-			&&guy.y-f.y-abs(guy.x-f.x)*tan(f.theta)<2){
-			if(guy.y-f.y-abs(guy.x-f.x)*tan(f.theta)>1){
+			&&guy.y-(240*(1-gravity)+gravity*f.y)-abs(guy.x-f.x)*tan(gravity*f.theta)<2){
+			if(guy.y-(240*(1-gravity)+gravity*f.y)-abs(guy.x-f.x)*tan(gravity*f.theta)>1){
 				guy.y-=1;
 				safe=true;
 				if(pressed==R){guy.x-=1;}
 				else if(pressed==L){guy.x+=1;}
+				if(f.type=="flip" && !flipWait){
+					pressed=N;
+					gravity = -gravity;
+					drawBackground(level,gravity);
+					guy.y=480-(guy.y-5)
+					flipWait=true;
+				}
 
 				guy.fallingFrames=0;
-				guy.theta=f.theta;
-			}else if(guy.y-f.y-abs(guy.x-f.x)*tan(f.theta)>0){
+				guy.theta=gravity*f.theta;
+			}else if(guy.y-(240*(1-gravity)+gravity*f.y)-abs(guy.x-f.x)*tan(gravity*f.theta)>0){
 				safe=true;
-				guy.theta=f.theta;
+				guy.theta=gravity*f.theta;
 				guy.fallingFrames=0;
+				if(f.type=="flip" && !flipWait){
+					pressed=N;
+					gravity=-gravity;
+					drawBackground(level,gravity);
+					guy.y=480-(guy.y-5)
+					flipWait=true;
+				}
 			}
 		}
 	}
@@ -73,13 +90,12 @@ function makeMove(level, guy, upWait, gravity){
 		guy.fallingFrames +=1;
 		if(guy.fallingFrames>3){
 			guy.theta=0;
-			guy.fallingFrames=0;
 		}
 	}
 	
 	guy.ctx.clearRect(0,0,guy.canvas.width,guy.canvas.height);
 	drawGuy(guy);
-	return([guy,upWait,gravity]);
+	return([guy,upWait, flipWait, gravity]);
 }
 
 
@@ -92,27 +108,30 @@ function drawGuy(guy){
 	guy.ctx.setTransform(1,0,0,1,0,0);
 }
 
-function checkFlag(guy,level){
-	if(pow(guy.x-levels[level].flagX,2)+pow(guy.y-levels[level].flagY,2)<100
-		&& abs(guy.theta-levels[level].flagTheta)<1){
+function checkFlag(guy,level,gravity){
+	if(pow(guy.x-levels[level].flagX,2)+pow(guy.y-(240*(1-gravity)+gravity*levels[level].flagY),2)<100
+		&& abs(guy.theta-gravity*(levels[level].flagTheta))<2){
 		
 		return true;
 		}else{return false;}
 }
 
-function checkPortal(level, guy, upWait, gravity){
+function checkPortal(level, guy, upWait, flipWait, gravity){
 	for(p of levels[level].portals){
 		if(pow(guy.x-p.x[0],2)+pow(guy.y-p.y[0],2)<20){
 			guy.x=p.x[1];
-			guy.y=p.y[1]-2*cos(p.theta[1]);
-			guy.theta = p.theta[1];
+			guy.y=p.y[1]-2*cos(gravity*p.theta[1]);
+			guy.theta = gravity*p.theta[1];
 		}else if(pow(guy.x-p.x[1],2)+pow(guy.y-p.y[1],2)<20){
 			guy.x=p.x[0];
-			guy.y=p.y[0]-2*cos(p.theta[0]);
-			guy.theta = p.theta[0];
+			guy.y=p.y[0]-2*cos(gravity*p.theta[0]);
+			guy.theta = gravity*p.theta[0];
 		}	
 	}
 	upWait=true;
-	return makeMove(level, guy, upWait, gravity);
+	return makeMove(level, guy, upWait, flipWait, gravity);
 }
+
+
+
 
