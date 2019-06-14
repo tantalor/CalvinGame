@@ -7,10 +7,18 @@
 </head>
 <body>
 
-<canvas id="floorCanvas" width="480" height="320" style="position: absolute; left: 50; top: 50; z-index: 0;"></canvas>
+<center>
+<div class="intro">Welcome! Ready to play?<br><br></div>
+<button type="button" class="intro" id="goButton">Let's Go</button>
 
-<canvas id="guyCanvas" width="480" height="320" style="position: absolute; left: 50; top: 50; z-index: 0;"></canvas>
+<br>
+<br>
+<div id="levelMessage"> </div>
 
+<canvas id="floorCanvas" width="480" height="480" style="position: absolute; left: 200; top: 50; z-index: 0;"></canvas>
+
+<canvas id="guyCanvas" width="480" height="480" style="position: absolute; left: 200; top: 50; z-index: 0;"></canvas>
+</center>
 
 <script src="levels.js"></script>
 <script src="background.js"></script>

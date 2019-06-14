@@ -1,6 +1,7 @@
-function drawBackground(level){
+function drawBackground(level,gravity){
 	var backgroundCanvas=document.getElementById("floorCanvas");
 	var bgctx = backgroundCanvas.getContext("2d");
+	bgctx.clearRect(0,0,backgroundCanvas.width,backgroundCanvas.height);
 	drawFloor(bgctx,level);
 	drawPortals(bgctx,level);
 	
@@ -11,26 +12,35 @@ function drawBackground(level){
 
 
 function drawFloor(ctx,level){
-	for(var i=0;i<levels[level].floor.length;i++){
-		ctx.translate(levels[level].floor[i].floorX,levels[level].floor[i].floorY);
-		ctx.rotate(levels[level].floor[i].theta);
-		ctx.fillstyle="black";
-		ctx.fillRect(0,0,levels[level].floor[i].width,2);
-		ctx.setTransform(1,0,0,1,0,0)
+	for(f of levels[level].floor){
+		if(f.type=="floor"){
+			ctx.translate(f.x,f.y);
+			ctx.rotate(f.theta);
+			ctx.fillStyle="black";
+			ctx.fillRect(0,0,f.width,2);
+			ctx.setTransform(1,0,0,1,0,0)
+		}else if(f.type=="bridge"){
+			ctx.translate(f.x,f.y);
+			ctx.rotate(f.theta);
+			ctx.strokeStyle="#a0522d";
+			ctx.arc(f.width/2,-17/20*f.width,f.width,Math.PI/3,-4/3*Math.PI)
+			ctx.stroke();
+			ctx.setTransform(1,0,0,1,0,0)
+		}
 	}
 	
 }
 
 function drawPortals(ctx,level){
-	for(var i=0;i<levels[level].portals.length;i++){
-		ctx.translate(levels[level].portals[i].portalX[0]+20*Math.sin(levels[level].portals[i].theta[0]),levels[level].portals[i].portalY[0]-20*Math.cos(levels[level].portals[i].theta[0]));
-		ctx.rotate(levels[level].portals[i].theta[0]);
-		ctx.fillStyle=levels[level].portals[i].color;
+	for(p of levels[level].portals){
+		ctx.translate(p.x[0]+20*sin(p.theta[0]),p.y[0]-20*cos(p.theta[0]));
+		ctx.rotate(p.theta[0]);
+		ctx.fillStyle=p.color;
 		ctx.fillRect(0,0,10,20);
 		ctx.setTransform(1,0,0,1,0,0);
-		ctx.translate(levels[level].portals[i].portalX[1]+20*Math.sin(levels[level].portals[i].theta[1]),levels[level].portals[i].portalY[1]-20*Math.cos(levels[level].portals[i].theta[1]));
-		ctx.rotate(levels[level].portals[i].theta[1]);
-		ctx.fillStyle=levels[level].portals[i].color;
+		ctx.translate(p.x[1]+20*sin(p.theta[1]),p.y[1]-20*cos(p.theta[1]));
+		ctx.rotate(p.theta[1]);
+		ctx.fillStyle=p.color;
 		ctx.fillRect(0,0,10,20);
 		ctx.setTransform(1,0,0,1,0,0);
 	}

@@ -1,134 +1,118 @@
-document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keydown",keyDownHandler,false);
 document.addEventListener("keyup", keyUpHandler, false);
-var rightPressed=false;
-var leftPressed=false;
-var upPressed=false;
+var N=0;
+var R=1;
+var L=2;
+var U=3;
 
+var pressed=N;
 
-function keyDownHandler(e) {
-    if(e.key == "ArrowRight") {
-      rightPressed = true;
-    }
-    else if(e.key == "ArrowLeft") {
-      leftPressed = true;
-    }
-		else if(e.key=="ArrowUp"){
-			upPressed=true;
-		}
+function keyDownHandler(e){
+	if(e.key=="ArrowRight"){
+		pressed=R;
+	}else if(e.key=="ArrowLeft"){
+		pressed=L;
+	}else if(e.key=="ArrowUp"){
+		pressed=U;
+	}
 }
 
-function keyUpHandler(e) {
-	if(e.key == "ArrowRight") {
-		rightPressed = false;
-	}
-	else if(e.key == "ArrowLeft") {
-		leftPressed = false;
-  }
-	else if(e.key=="ArrowUp"){
-		upPressed=false;
-	}
-
+function keyUpHandler(e){
+	pressed=N;
 }
 
-
-
-function move(floor, x, y, theta,frames,ctx,canvas,portals,upWait){
-	
-	if(upPressed){
+function move(level, guy, upWait, gravity){
+	if(pressed==U){
 		if(!upWait){
-			upWait=true;
-			return checkPortal(x,y,portals,floor,theta,frames,ctx,canvas,upWait);
+			return checkPortal(level,guy,upWait,gravity);
 		}else{
-			return [x,y,theta,frames,true];
+			return [guy, true, gravity];
 		}
 	}else{
-		if(rightPressed) {
-			x += 1;
+		if(pressed==R){
+			guy.x+=1;
+		}else if(pressed==L){
+			guy.x-=1;
 		}
-		else if(leftPressed) {
-			x -= 1;
-		}
-		upWait=false;
 		
-		return makeMove(floor,x,y,theta,frames,ctx,canvas,upWait);
+		upWait=false;
+		return makeMove(level, guy, upWait, gravity)
 	}
-	
-	
-
 }
 
-function makeMove(floor,x,y,theta,frames,ctx,canvas,upWait){
+
+
+
+function makeMove(level, guy, upWait, gravity){
 	var safe=false;
-	for(var i=0;i<floor.length;i++){
-		if(x<floor[i].width*Math.cos(floor[i].theta)+floor[i].floorX-1 
-			&& x>floor[i].floorX-1 
-			&& y-floor[i].floorY-Math.abs(x-floor[i].floorX)*Math.tan(floor[i].theta)<2){
-			if(y-floor[i].floorY-Math.abs(x-floor[i].floorX)*Math.tan(floor[i].theta)>1){
-				y-=1;
+	
+	for(f of levels[level].floor){
+		if(guy.x<f.width*cos(f.theta)+f.x-1
+			&& guy.x>f.x-1
+			&&guy.y-f.y-abs(guy.x-f.x)*tan(f.theta)<2){
+			if(guy.y-f.y-abs(guy.x-f.x)*tan(f.theta)>1){
+				guy.y-=1;
 				safe=true;
-				if(rightPressed){
-					x-=1;
-				}else if(leftPressed){
-					x+=1;
-				}
-				frames=0;
-				theta=floor[i].theta;
-			}else if(y-floor[i].floorY-Math.abs(x-floor[i].floorX)*Math.tan(floor[i].theta)>0){
+				if(pressed==R){guy.x-=1;}
+				else if(pressed==L){guy.x+=1;}
+
+				guy.fallingFrames=0;
+				guy.theta=f.theta;
+			}else if(guy.y-f.y-abs(guy.x-f.x)*tan(f.theta)>0){
 				safe=true;
-				theta=floor[i].theta;
-				frames=0;
+				guy.theta=f.theta;
+				guy.fallingFrames=0;
 			}
 		}
 	}
-	if(safe==false){
-		y+=1;
-		if(rightPressed){
-			x-=1;
-		}else if(leftPressed){
-			x+=1;
+	
+	if(!safe){
+		guy.y+=1;
+		if(pressed==R){guy.x-=1;}
+		else if(pressed==L){guy.x+=1;}
+		guy.fallingFrames +=1;
+		if(guy.fallingFrames>3){
+			guy.theta=0;
+			guy.fallingFrames=0;
 		}
-		frames+=1;
-		if(frames>3){
-			theta=0;
-			frames=0;
+	}
+	
+	guy.ctx.clearRect(0,0,guy.canvas.width,guy.canvas.height);
+	drawGuy(guy);
+	return([guy,upWait,gravity]);
+}
+
+
+function drawGuy(guy){
+	guy.ctx.translate(guy.x,guy.y);
+	guy.ctx.rotate(guy.theta);
+	guy.ctx.font = "20px Arial";
+	guy.ctx.strokeStyle="black";
+	guy.ctx.strokeText('\u1330',0,0);
+	guy.ctx.setTransform(1,0,0,1,0,0);
+}
+
+function checkFlag(guy,level){
+	if(pow(guy.x-levels[level].flagX,2)+pow(guy.y-levels[level].flagY,2)<100
+		&& abs(guy.theta-levels[level].flagTheta)<1){
+		
+		return true;
+		}else{return false;}
+}
+
+function checkPortal(level, guy, upWait, gravity){
+	for(p of levels[level].portals){
+		if(pow(guy.x-p.x[0],2)+pow(guy.y-p.y[0],2)<20){
+			guy.x=p.x[1];
+			guy.y=p.y[1]-2*cos(p.theta[1]);
+			guy.theta = p.theta[1];
+		}else if(pow(guy.x-p.x[1],2)+pow(guy.y-p.y[1],2)<20){
+			guy.x=p.x[0];
+			guy.y=p.y[0]-2*cos(p.theta[0]);
+			guy.theta = p.theta[0];
 		}	
 	}
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	drawGuy(x,y,theta,ctx);
-	
-	return([x,y,theta,frames,upWait])
+	upWait=true;
+	return makeMove(level, guy, upWait, gravity);
 }
 
-
-function drawGuy(x,y,theta,ctx) {
-	ctx.translate(x,y);
-	ctx.rotate(theta);
-	ctx.font = "20px Arial"
-	ctx.strokeStyle = 'black';
-	ctx.strokeText('\u1330',0,0);
-	ctx.setTransform(1, 0, 0, 1, 0, 0);
-	
-}
-
-
-
-function checkFlag(x,y,flagX,flagY){
-	if((x-flagX)*(x-flagX)+(y-flagY)*(y-flagY)<100){
-		return true;
-	}else{return false;}
-}
-
-function checkPortal(x,y,portals,floor,theta,frames,ctx,canvas,upWait){
-	for(var i=0;i<portals.length;i++){
-		if((x-portals[i].portalX[0])*(x-portals[i].portalX[0])+(y-portals[i].portalY[0])*(y-portals[i].portalY[0])<25){
-			x=portals[i].portalX[1];
-			y=portals[i].portalY[1];
-			theta=portals[i].theta[1];
-		}else if((x-portals[i].portalX[1])*(x-portals[i].portalX[1])+(y-portals[i].portalY[1])*(y-portals[i].portalY[1])<25){
-				x=portals[i].portalX[0];
-				y=portals[i].portalY[0];
-				theta=portals[i].theta[0];
-			}
-			return makeMove(floor,x,y,theta,frames,ctx,canvas,upWait)
-	}
-}
