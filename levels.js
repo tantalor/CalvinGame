@@ -1,5 +1,5 @@
 levels=[
-	{alertText:"Move to the goal. No jumping.",
+	{levelText:"Move to the goal. No jumping.",
 		floor: [{x:10,y:200,width:100,theta:0,type:"floor"}],
 		x:20,
 		y:180,
@@ -9,7 +9,7 @@ levels=[
 		flagTheta:0,
 		portals:[]},
 		
-		{alertText:"You can go up an incline.",
+		{levelText:"You can go up an incline.",
 		floor:[{x:10,y:200,width:101,theta:0,type:"floor"},
 			{x:108,y:201,width:50,theta:-Math.PI/4,type:"floor"},
 			{x:141,y:167,width:50,theta:0,type:"floor"}],
@@ -21,7 +21,7 @@ levels=[
 		flagTheta:0,
 		portals:[]},
 			
-		{alertText:"You can travel through a bridge.",
+		{levelText:"You can travel through a bridge.",
 		floor:[{x:10,y:200,width:101,theta:0,type:"floor"},
 			{x:108,y:201,width:50,theta:-Math.PI/4,type:"floor"},
 			{x:141,y:167,width:50,theta:0,type:"floor"},
@@ -35,7 +35,7 @@ levels=[
 		flagTheta:0,
 		portals:[]},
 		
-		{alertText:"You can go through portals by pressing the up button.",
+		{levelText:"You can go through portals by pressing the up button.",
 		floor:[{x:10,y:200,width:80,theta:0,type:"floor"},
 			{x:120,y:200,width:80,theta:0,type:"floor"}],
 		x:20,
@@ -46,7 +46,7 @@ levels=[
 		flagTheta:0,
 		portals:[{color:"red",x:[60,130],y:[200,200],theta:[0,0]}]},
 		
-		{alertText:"You can flip the world upside down.",
+		{levelText:"You can flip the world upside down.",
 			floor: [{x:60,y:200,width:40,theta:0,type:"floor"},
 				{x:98,y:200,width:30,theta:0,type:"flip"},
 				{x:43,y:100,width:75,theta:0,type:"floor"},
@@ -60,9 +60,9 @@ levels=[
 			flagTheta:0,
 			portals:[]},
 			
-		{alertText: "Now you're ready for your first real level!",
-		floor: [{x:65,y:228,width:53,theta:Math.PI/2,type:"wall"},
-			{x:170,y:228,width:53,theta:Math.PI/2,type:"wall"},
+		{levelText: "Now you're ready for your first real level!",
+		floor: [{x:65,y:228,width:52,theta:Math.PI/2,type:"wall"},
+			{x:170,y:228,width:52,theta:Math.PI/2,type:"wall"},
 			{x:0,y:300,width:40,theta:0,type:"floor"},
 			{x:28,y:280,width:39,theta:0,type:"floor"},
 			{x:80,y:280,width:50,theta:0,type:"floor"},
@@ -80,6 +80,36 @@ levels=[
 		flagX:200,
 		flagY:280,
 		flagTheta:0,
-		portals:[{color:"orange",x:[15,85],y:[300,250],theta:[0,0]}]}
+		portals:[{color:"orange",x:[15,85],y:[300,250],theta:[0,0]}]},
+		
+		{levelText:"FLOATING ISLANDS",
+		floor:[{x:60, y:80, width:60, theta:0, type:"floor"},
+			{x:60, y:20, width:61, theta:Math.PI/2, type:"wall"},
+			{x:60, y:20, width:220, theta:0, type:"floor"},
+			{x:240, y:20, width:21, theta:Math.PI/2, type:"wall"},
+			{x:280, y:20, width:21, theta:Math.PI/2, type:"wall"},
+			{x:240, y:40, width:40, theta:0, type:"flip"},
+			{x:238, y:100, width:20, theta:Math.PI/2, type:"wall"},
+			{x:100, y:120, width:138, theta:0, type:"floor"},
+			{x:120, y:120, width:20, theta:Math.PI/2, type:"wall"},
+			{x:60, y:140, width:60, theta:0, type:"floor"},
+			{x:60, y:140, width:22, theta:Math.PI/2, type:"wall"},
+			{x:20, y:170, width:30, theta:Math.PI/2, type:"wall"},
+			{x:20, y:200, width:60, theta:0, type:"floor"},
+			{x:79, y:200, width:40, theta:0, type:"flip"},
+			{x:235, y:200, width:150, theta:0, type:"floor"},
+			{x:280, y:201, width:70, theta:-Math.PI/4, type:"floor"},
+			{x:330, y:150, width:30, theta:0, type:"floor"},
+			{x:340, y:250, width:120, theta:0, type:"floor"},
+			{x:340, y:221, width:30, theta:Math.PI/2, type:"wall"},
+			{x:460, y:221, width:30, theta:Math.PI/2, type:"wall"}
+		],
+		x:80,
+		y:78,
+		theta:0,
+		flagX:360,
+		flagY:250,
+		flagTheta:0,
+		portals:[]}
 			
 ]

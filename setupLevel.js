@@ -1,20 +1,28 @@
 var {cos, sin, tan, abs, pow, atan}=Math;
-var level=0;
 
-document.getElementById("goButton").onclick=function() {
+
+document.getElementById("levelsButton").onclick=function(){
 	for(e of document.getElementsByClassName("intro")){
 		e.style.display="none";
 	}
-	setup(level);
+	setup(6);
 }
 
+
+
+document.getElementById("tutorialButton").onclick=function() {
+	for(e of document.getElementsByClassName("intro")){
+		e.style.display="none";
+	}
+	setup(0);
+}
 
 function setup(level){
 	pressed=N;
 	var gravity=1;
 	
 	drawBackground(level,gravity);
-	document.getElementById("levelMessage").innerText=levels[level].alertText;
+	document.getElementById("levelMessage").innerText=levels[level].levelText;
 	
 	
 	var guyCanvas=document.getElementById("guyCanvas");
@@ -44,6 +52,11 @@ function setup(level){
 			
 			if(level==levels.length-1){
 				alert("Congratulations! You won the game!!");
+			}else if(level==5){
+				alert("You've completed the tutorial! Now on to the game.")
+				clearInterval(a);
+				level+=1;
+				setup(level);
 			}else{
 				alert("Good job! Try the next level.");
 				clearInterval(a);
