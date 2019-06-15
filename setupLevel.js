@@ -5,6 +5,9 @@ document.getElementById("levelsButton").onclick=function(){
 	for(e of document.getElementsByClassName("intro")){
 		e.style.display="none";
 	}
+	for(e of document.getElementsByName("playing")){
+		e.style.display="block";
+	}
 	setup(6);
 }
 
@@ -13,6 +16,9 @@ document.getElementById("levelsButton").onclick=function(){
 document.getElementById("tutorialButton").onclick=function() {
 	for(e of document.getElementsByClassName("intro")){
 		e.style.display="none";
+	}
+	for(e of document.getElementsByName("playing")){
+		e.style.display="block";
 	}
 	setup(0);
 }
@@ -26,7 +32,6 @@ function setup(level){
 	
 	document.getElementById("backOne").onclick=function(){
 		clearInterval(a);
-		pressed=N;
 		setup(level-1);
 	}
 	
