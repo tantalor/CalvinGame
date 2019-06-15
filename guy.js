@@ -2,7 +2,7 @@ document.addEventListener("keydown",keyDownHandler,false);
 document.addEventListener("keyup", keyUpHandler, false);
 var N=0;
 var R=1;
-var L=2;
+var L=-1;
 var U=3;
 
 var pressed=N;
@@ -74,6 +74,7 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 				if(pressed==R){guy.x-=1;}
 				else if(pressed==L){guy.x+=1;}
 				if(f.type=="flip" && !flipWait){
+					guy.x=f.x+f.width/2;
 					pressed=N;
 					gravity = -gravity;
 					drawBackground(level,gravity);
@@ -88,10 +89,11 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 				guy.theta=gravity*f.theta;
 				guy.fallingFrames=0;
 				if(f.type=="flip" && !flipWait){
+					guy.x=f.x+f.width/2;
 					pressed=N;
 					gravity=-gravity;
 					drawBackground(level,gravity);
-					guy.y=480-(guy.y-5)
+					guy.y=480-(guy.y-5);
 					flipWait=true;
 				}
 			}
