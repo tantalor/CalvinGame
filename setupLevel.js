@@ -33,6 +33,11 @@ function setup(level){
 			
 	var a=setInterval(function(){
 		[___, upWait, flipWait,gravity]=move(level,guy,upWait,flipWait,gravity);
+		if(gravity==0){
+			alert("Oh no! You should probably try that again.");
+			clearInterval(a);
+			setup(level);
+		}
 		solved=checkFlag(guy,level,gravity);
 		if(solved){
 			clearInterval(a);

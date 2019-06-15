@@ -92,7 +92,9 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 			guy.theta=0;
 		}
 	}
-	
+	if(guy.y>500){
+		gravity=0;
+	}
 	guy.ctx.clearRect(0,0,guy.canvas.width,guy.canvas.height);
 	drawGuy(guy);
 	return([guy,upWait, flipWait, gravity]);

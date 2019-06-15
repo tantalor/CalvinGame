@@ -65,7 +65,7 @@ levels=[
 			{x:28,y:280,width:39,theta:0,type:"floor"},
 			{x:80,y:280,width:50,theta:0,type:"floor"},
 			{x:129,y:280,width:33,theta:0,type:"flip"},
-			{x:39,y:180,width:32,theta:-Math.PI/4,type:"floor"},
+			{x:38,y:181,width:33,theta:-Math.PI/4,type:"floor"},
 			{x:170,y:280,width:50,theta:0,type:"floor"},
 			{x:0,y:180,width:40,theta:0,type:"floor"},
 			{x:61,y:157,width:180,theta:0,type:"floor"},
