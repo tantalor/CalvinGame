@@ -24,6 +24,17 @@ function setup(level){
 	drawBackground(level,gravity);
 	document.getElementById("levelMessage").innerText=levels[level].levelText;
 	
+	document.getElementById("backOne").onclick=function(){
+		clearInterval(a);
+		pressed=N;
+		setup(level-1);
+	}
+	
+	document.getElementById("forwardOne").onclick=function(){
+		clearInterval(a);
+		pressed=N;
+		setup(level+1);
+	}
 	
 	var guyCanvas=document.getElementById("guyCanvas");
 	var guyctx=guyCanvas.getContext("2d");
@@ -49,9 +60,9 @@ function setup(level){
 		solved=checkFlag(guy,level,gravity);
 		if(solved){
 			clearInterval(a);
-			
 			if(level==levels.length-1){
 				alert("Congratulations! You won the game!!");
+				level+=1;
 			}else if(level==5){
 				alert("You've completed the tutorial! Now on to the game.")
 				clearInterval(a);
