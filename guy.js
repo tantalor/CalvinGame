@@ -63,13 +63,14 @@ function move(level, guy, upWait, flipWait, gravity){
 
 function makeMove(level, guy, upWait, flipWait, gravity){
 	var safe=false;
-	
+	console.log("x"+guy.x+"y"+guy.y)
 	for(f of levels[level].floor){
 		if(guy.x<f.width*cos(gravity*f.theta)+f.x+2
 			&& guy.x>f.x-13
 			&&guy.y-(240*(1-gravity)+gravity*f.y)-abs(guy.x-f.x)*tan(gravity*f.theta)<2){
 			if(guy.y-(240*(1-gravity)+gravity*f.y)-abs(guy.x-f.x)*tan(gravity*f.theta)>1){
 				guy.y-=1;
+				if(gravity*f.theta<-Math.PI/4){guy.y-=1;}
 				safe=true;
 				if(pressed==R){guy.x-=1;}
 				else if(pressed==L){guy.x+=1;}
@@ -141,14 +142,16 @@ function checkPortal(level, guy, upWait, flipWait, gravity){
 			guy.x=p.x[1];
 			guy.y=(240*(1-gravity)+gravity*p.y[1])-2*gravity;
 			guy.theta = gravity*p.theta[1];
+			upWait=true;
+			return makeMove(level, guy, upWait, flipWait, gravity);
 		}else if(pow(guy.x-p.x[1],2)+pow(guy.y-(240*(1-gravity)+gravity*p.y[1]),2)<600){
 			guy.x=p.x[0];
 			guy.y=(240*(1-gravity)+gravity*p.y[0])-2*gravity;
 			guy.theta = gravity*p.theta[0];
+			upWait=true;
+			return makeMove(level, guy, upWait, flipWait, gravity);
 		}	
 	}
-	upWait=true;
-	return makeMove(level, guy, upWait, flipWait, gravity);
 }
 
 

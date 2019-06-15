@@ -24,14 +24,17 @@ function drawFloor(ctx,level,gravity){
 			ctx.fillRect(0,0,f.width,2);
 			ctx.setTransform(1,0,0,1,0,0)
 		}else if(f.type=="bridge"){
-			ctx.translate(f.x,f.y);
+			ctx.translate(f.x,240*(1-gravity)+gravity*f.y);
 			ctx.rotate(gravity*f.theta);
+			ctx.beginPath();
 			ctx.strokeStyle="#a0522d";
 			var a=4;
 			var Rad = pow(f.width,2)/8/a-a/2;
-			var theta = atan(f.width/(2*(Rad-a)));
-			ctx.arc(f.width/2,-(240*(1-gravity)+gravity*(Rad-a)),Rad,Math.PI/2-theta,Math.PI/2+theta);
+			var angle = Math.atan(f.width/(2*(Rad-a)));
+			ctx.arc(f.width/2,-(Rad-a),Rad,Math.PI/2-angle,Math.PI/2+angle);
 			ctx.stroke();
+			ctx.closePath();
+
 			ctx.setTransform(1,0,0,1,0,0)
 		}else if(f.type=="flip"){
 			ctx.translate(f.x,240*(1-gravity)+gravity*f.y);
