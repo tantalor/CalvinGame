@@ -22,6 +22,7 @@ function keyUpHandler(e){
 }
 
 function move(level, guy, upWait, flipWait, gravity){
+	var wall=false;
 	if(pressed==U){
 		flipWait=false;
 		if(!upWait){
@@ -30,15 +31,29 @@ function move(level, guy, upWait, flipWait, gravity){
 			return [guy, true, flipWait, gravity];
 		}
 	}else{
-		if(pressed==R){
+		for(f of levels[level].floor){
+			if(f.type=="wall"){
+				if((gravity==1 && guy.y>f.y-2 && guy.y<f.y+f.width+2)
+						||(gravity==-1 && guy.y>480-f.y-f.width-2 && guy.y<480-f.y+2)){
+						if(guy.x-f.x<2 && 0<guy.x-f.x && pressed==L){
+							wall=true;
+						}else if(f.x-guy.x<10 && 0<f.x-guy.x && pressed==R){
+							wall=true;
+						}
+					}
+			}
+		}
+		
+		if(pressed==R && !wall){
 			guy.x+=1;
 			flipWait=false;
-		}else if(pressed==L){
+		}else if(pressed==L && !wall){
 			guy.x-=1;
 			flipWait=false;
 		}
 		
 		upWait=false;
+	
 		return makeMove(level, guy, upWait, flipWait, gravity)
 	}
 }
@@ -50,8 +65,8 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 	var safe=false;
 	
 	for(f of levels[level].floor){
-		if(guy.x<f.width*cos(gravity*f.theta)+f.x+1
-			&& guy.x>f.x-1
+		if(guy.x<f.width*cos(gravity*f.theta)+f.x+2
+			&& guy.x>f.x-2
 			&&guy.y-(240*(1-gravity)+gravity*f.y)-abs(guy.x-f.x)*tan(gravity*f.theta)<2){
 			if(guy.y-(240*(1-gravity)+gravity*f.y)-abs(guy.x-f.x)*tan(gravity*f.theta)>1){
 				guy.y-=1;

@@ -17,7 +17,7 @@ function drawBackground(level,gravity){
 
 function drawFloor(ctx,level,gravity){
 	for(f of levels[level].floor){
-		if(f.type=="floor"){
+		if(f.type=="floor"||f.type=="wall"){
 			ctx.translate(f.x,240*(1-gravity)+gravity*f.y);
 			ctx.rotate(gravity*f.theta);
 			ctx.fillStyle="black";
