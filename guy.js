@@ -64,7 +64,7 @@ function move(level, guy, upWait, flipWait, gravity){
 function makeMove(level, guy, upWait, flipWait, gravity){
 	var safe=false;
 	for(f of levels[level].floor){
-		if(guy.x<f.width*cos(gravity*f.theta)+f.x+2
+		if(f.type!="wall" && guy.x<f.width*cos(gravity*f.theta)+f.x+2
 			&& guy.x>f.x-13
 			&&guy.y-(240*(1-gravity)+gravity*f.y)-abs(guy.x-f.x)*tan(gravity*f.theta)<2){
 			if(guy.y-(240*(1-gravity)+gravity*f.y)-abs(guy.x-f.x)*tan(gravity*f.theta)>1){
@@ -83,7 +83,7 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 
 				guy.fallingFrames=0;
 				guy.theta=gravity*f.theta;
-			}else if(guy.y-(240*(1-gravity)+gravity*f.y)-abs(guy.x-f.x)*tan(gravity*f.theta)>0){
+			}else if(f.type!="wall" && guy.y-(240*(1-gravity)+gravity*f.y)-abs(guy.x-f.x)*tan(gravity*f.theta)>0){
 				safe=true;
 				guy.theta=gravity*f.theta;
 				guy.fallingFrames=0;
