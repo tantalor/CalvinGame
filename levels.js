@@ -144,7 +144,7 @@ levels=[
 			{color:"yellow", x:[30,115],y:[100,140],theta:[0,0]},
 			{color:"cyan", x:[300,260],y:[100,100],theta:[0,0]},
 			{color:"magenta", x:[200,240],y:[100,140],theta:[0,0]},
-			{color:"orange",x:[450,20],y:[340,159],theta:[0,0]},
+			{color:"orange",x:[450,10],y:[340,180],theta:[0,Math.PI/2]},
 			{color:"purple",x:[100,150],y:[340,340],theta:[0,0]}
 			]}
 			
