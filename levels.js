@@ -25,7 +25,7 @@ levels=[
 		floor:[{x:10,y:200,width:101,theta:0,type:"floor"},
 			{x:108,y:201,width:50,theta:-Math.PI/4,type:"floor"},
 			{x:141,y:167,width:50,theta:0,type:"floor"},
-			{x:100,y:167,width:50,theta:0,type:"bridge"},
+			{x:102,y:167,width:45,theta:0,type:"bridge"},
 			{x:35,y:167,width:70,theta:0,type:"floor"}],
 		x:20,
 		y:180,
@@ -58,6 +58,28 @@ levels=[
 			flagX:10,
 			flagY:200,
 			flagTheta:0,
-			portals:[]}
+			portals:[]},
+			
+		{alertText: "Now you're ready for your first real level!",
+		floor: [{x:0,y:300,width:40,theta:0,type:"floor"},
+			{x:28,y:280,width:39,theta:0,type:"floor"},
+			{x:80,y:280,width:50,theta:0,type:"floor"},
+			{x:129,y:280,width:33,theta:0,type:"flip"},
+			{x:39,y:180,width:32,theta:-Math.PI/4,type:"floor"},
+			{x:170,y:280,width:50,theta:0,type:"floor"},
+			{x:0,y:180,width:40,theta:0,type:"floor"},
+			{x:61,y:157,width:180,theta:0,type:"floor"},
+			{x:156,y:156,width:32,theta:Math.PI/4,type:"floor"},
+			{x:177,y:177,width:30,theta:0,type:"flip"},
+			{x:65,y:230,width:105,theta:0,type:"floor"},
+			{x:65,y:280,width:51,theta:-Math.PI/2,type:"floor"},
+			{x:170,y:230,width:51,theta:Math.PI/2,type:"floor"}],
+		x:30,
+		y:278,
+		theta:0,
+		flagX:200,
+		flagY:280,
+		flagTheta:0,
+		portals:[{color:"orange",x:[15,85],y:[300,250],theta:[0,0]}]}
 			
 ]

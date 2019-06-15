@@ -1,4 +1,4 @@
-var {cos, sin, tan, abs, pow}=Math;
+var {cos, sin, tan, abs, pow, atan}=Math;
 var level=0;
 
 document.getElementById("goButton").onclick=function() {
@@ -10,7 +10,7 @@ document.getElementById("goButton").onclick=function() {
 
 
 function setup(level){
-	
+	pressed=N;
 	var gravity=1;
 	
 	drawBackground(level,gravity);
@@ -42,7 +42,6 @@ function setup(level){
 			}else{
 				alert("Good job! Try the next level.");
 				clearInterval(a);
-				pressed=N;
 				level+=1;
 				setup(level);	
 			}

@@ -24,10 +24,13 @@ function drawFloor(ctx,level,gravity){
 			ctx.fillRect(0,0,f.width,2);
 			ctx.setTransform(1,0,0,1,0,0)
 		}else if(f.type=="bridge"){
-			ctx.translate(f.x,240*(1-gravity)+gravity*f.y);
+			ctx.translate(f.x,f.y);
 			ctx.rotate(gravity*f.theta);
 			ctx.strokeStyle="#a0522d";
-			ctx.arc(f.width/2,240*(1-gravity)+gravity*(-17/20*f.width),f.width,Math.PI/3,-4/3*Math.PI)
+			var a=4;
+			var Rad = pow(f.width,2)/8/a-a/2;
+			var theta = atan(f.width/(2*(Rad-a)));
+			ctx.arc(f.width/2,-(240*(1-gravity)+gravity*(Rad-a)),Rad,Math.PI/2-theta,Math.PI/2+theta);
 			ctx.stroke();
 			ctx.setTransform(1,0,0,1,0,0)
 		}else if(f.type=="flip"){
@@ -49,12 +52,12 @@ function drawFloor(ctx,level,gravity){
 function drawPortals(ctx,level,gravity){
 	for(p of levels[level].portals){
 		ctx.translate(p.x[0]+20*sin(p.theta[0]),240*(1-gravity)+gravity*(p.y[0]-20*cos(p.theta[0])));
-		ctx.rotate(gravity*(p.theta[0]));
+		ctx.rotate(Math.PI/2*(1-gravity)+gravity*(p.theta[0]));
 		ctx.fillStyle=p.color;
 		ctx.fillRect(0,0,10,20);
 		ctx.setTransform(1,0,0,1,0,0);
 		ctx.translate(p.x[1]+20*sin(p.theta[1]),240*(1-gravity)+gravity*(p.y[1]-20*cos(p.theta[1])));
-		ctx.rotate(gravity*(p.theta[1]));
+		ctx.rotate(Math.PI/2*(1-gravity)+gravity*(p.theta[1]));
 		ctx.fillStyle=p.color;
 		ctx.fillRect(0,0,10,20);
 		ctx.setTransform(1,0,0,1,0,0);

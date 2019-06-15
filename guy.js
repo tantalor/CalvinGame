@@ -50,7 +50,7 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 	var safe=false;
 	
 	for(f of levels[level].floor){
-		if(guy.x<f.width*cos(gravity*f.theta)+f.x-1
+		if(guy.x<f.width*cos(gravity*f.theta)+f.x+1
 			&& guy.x>f.x-1
 			&&guy.y-(240*(1-gravity)+gravity*f.y)-abs(guy.x-f.x)*tan(gravity*f.theta)<2){
 			if(guy.y-(240*(1-gravity)+gravity*f.y)-abs(guy.x-f.x)*tan(gravity*f.theta)>1){
@@ -118,13 +118,13 @@ function checkFlag(guy,level,gravity){
 
 function checkPortal(level, guy, upWait, flipWait, gravity){
 	for(p of levels[level].portals){
-		if(pow(guy.x-p.x[0],2)+pow(guy.y-p.y[0],2)<20){
+		if(pow(guy.x-p.x[0],2)+pow(guy.y-(240*(1-gravity)+gravity*p.y[0]),2)<600){
 			guy.x=p.x[1];
-			guy.y=p.y[1]-2*cos(gravity*p.theta[1]);
+			guy.y=(240*(1-gravity)+gravity*p.y[1])-2*gravity;
 			guy.theta = gravity*p.theta[1];
-		}else if(pow(guy.x-p.x[1],2)+pow(guy.y-p.y[1],2)<20){
+		}else if(pow(guy.x-p.x[1],2)+pow(guy.y-(240*(1-gravity)+gravity*p.y[1]),2)<600){
 			guy.x=p.x[0];
-			guy.y=p.y[0]-2*cos(gravity*p.theta[0]);
+			guy.y=(240*(1-gravity)+gravity*p.y[0])-2*gravity;
 			guy.theta = gravity*p.theta[0];
 		}	
 	}
