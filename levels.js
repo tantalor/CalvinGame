@@ -146,6 +146,30 @@ levels=[
 			{color:"magenta", x:[200,240],y:[100,140],theta:[0,0]},
 			{color:"orange",x:[450,10],y:[340,180],theta:[0,Math.PI/2]},
 			{color:"purple",x:[100,150],y:[340,340],theta:[0,0]}
-			]}
+			]},
+			
+		{levelText:"REFLECTION",
+		floor:[{x:130,y:130,width:101,theta:0,type:"floor"},
+			{x:130,y:130,width:240,theta:Math.PI/2,type:"wall"},
+			{x:130,y:190,width:30,theta:0,type:"floor"},
+			{x:130,y:310,width:30,theta:0,type:"floor"},
+			{x:130,y:250,width:200,theta:0,type:"floor"},
+			{x:130,y:370,width:101,theta:0,type:"floor"},
+			{x:230,y:130,width:35,theta:0,type:"flip"},
+			{x:230,y:370,width:35,theta:0,type:"flip"},
+			{x:260,y:130,width:111,theta:0,type:"floor"},
+			{x:260,y:370,width:111,theta:0,type:"floor"},
+			{x:370,y:130,width:240,theta:Math.PI/2,type:"wall"},
+			{x:228,y:159,width:52,theta:-Math.atan(30/42),type:"floor"},
+			{x:228,y:341,width:52,theta:Math.atan(30/42),type:"floor"},
+			{x:159,y:309,width:86,theta:Math.PI/4,type:"floor"},
+			{x:159,y:191,width:86,theta:-Math.PI/4,type:"floor"}],
+		x:140,
+		y:248,
+		theta:0,
+		flagX:150,
+		flagY:190,
+		flagTheta:Math.PI,
+		portals:[]}
 			
 ]

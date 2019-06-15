@@ -28,7 +28,7 @@ function move(level, guy, upWait, flipWait, gravity){
 		if(!upWait){
 			return checkPortal(level,guy,upWait, flipWait, gravity);
 		}else{
-			return [guy, true, flipWait, gravity];
+			return makeMove(level, guy, true, flipWait, gravity);
 		}
 	}else{
 		for(f of levels[level].floor){
@@ -131,7 +131,7 @@ function drawGuy(guy){
 
 function checkFlag(guy,level,gravity){
 	if(pow(guy.x-levels[level].flagX,2)+pow(guy.y-(240*(1-gravity)+gravity*levels[level].flagY),2)<100
-		&& abs(guy.theta-gravity*(levels[level].flagTheta))<2){
+		&& (abs(guy.theta-gravity*(levels[level].flagTheta))<2 || (guy.theta==0 && gravity==-1 && levels[level].flagTheta==Math.PI))){
 		
 		return true;
 		}else{return false;}
