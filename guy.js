@@ -63,7 +63,6 @@ function move(level, guy, upWait, flipWait, gravity){
 
 function makeMove(level, guy, upWait, flipWait, gravity){
 	var safe=false;
-	console.log("x"+guy.x+"y"+guy.y)
 	for(f of levels[level].floor){
 		if(guy.x<f.width*cos(gravity*f.theta)+f.x+2
 			&& guy.x>f.x-13

@@ -127,7 +127,7 @@ levels=[
 			{x:380,y:182,width:41,theta:0,type:"bridge"},
 			{x:420,y:182,width:51,theta:0,type:"floor"},
 			{x:420,y:182,width:68,theta:Math.atan(43/55),type:"floor"},
-			{x:379,y:270,width:77,theta:-Math.atan(43/45),type:"floor"},
+			{x:379,y:269,width:78,theta:-Math.atan(43/45),type:"floor"},
 			{x:380,y:215,width:54,theta:0,type:"floor"},
 			{x:430,y:215,width:33,theta:0,type:"bridge"},
 			{x:300,y:268,width:30,theta:0,type:"floor"},
