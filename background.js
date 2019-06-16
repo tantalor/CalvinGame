@@ -3,8 +3,8 @@ function drawBackground(level,gravity){
 	var bgctx = backgroundCanvas.getContext("2d");
 	backgroundCanvas.style.letterSpacing = "-1px"
 	bgctx.clearRect(0,0,backgroundCanvas.width,backgroundCanvas.height);
-	drawFloor(bgctx,level,gravity);
 	drawPortals(bgctx,level,gravity);
+	drawFloor(bgctx,level,gravity);
 
 	bgctx.translate(levels[level].flagX,240*(1-gravity)+gravity*levels[level].flagY)
 	bgctx.rotate(Math.PI/2*(1-gravity)+gravity*levels[level].flagTheta);

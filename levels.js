@@ -44,7 +44,7 @@ levels=[
 		flagX:310,
 		flagY:200,
 		flagTheta:0,
-		portals:[{color:"red",x:[210,280],y:[200,200],theta:[0,0]}]},
+		portals:[{color:"red",x:[210,280],y:[200,200],theta:[0,0],loc:[1,1]}]},
 		
 		{levelText:"TUTORIAL 5. You can flip the world upside down.",
 			floor: [{x:226,y:290,width:40,theta:0,type:"floor"},
@@ -82,7 +82,7 @@ levels=[
 		flagX:320,
 		flagY:280,
 		flagTheta:0,
-		portals:[{color:"orange",x:[135,205],y:[300,250],theta:[0,0]}]},
+		portals:[{color:"orange",x:[135,205],y:[300,250],theta:[0,0],loc:[1,-1]}]},
 		
 		{levelText:"FLOATING ISLANDS",
 		floor:[{x:60, y:180, width:60, theta:0, type:"floor"},
@@ -142,12 +142,12 @@ levels=[
 		flagX:250,
 		flagY:340,
 		flagTheta:0,
-		portals:[{color:"red", x:[80,333],y:[140,160],theta:[0,0]},
-			{color:"yellow", x:[30,115],y:[100,140],theta:[0,0]},
-			{color:"cyan", x:[300,260],y:[100,100],theta:[0,0]},
-			{color:"magenta", x:[200,240],y:[100,140],theta:[0,0]},
-			{color:"orange",x:[450,10],y:[340,180],theta:[0,Math.PI/2]},
-			{color:"purple",x:[100,150],y:[340,340],theta:[0,0]}
+		portals:[{color:"red", x:[80,333],y:[140,160],theta:[0,0],loc:[1,-1]},
+			{color:"yellow", x:[30,115],y:[100,140],theta:[0,0],loc:[-1,1]},
+			{color:"cyan", x:[300,260],y:[100,100],theta:[0,0],loc:[-1,-1]},
+			{color:"magenta", x:[200,240],y:[100,140],theta:[0,0],loc:[-1,1]},
+			{color:"orange",x:[450,10],y:[340,180],theta:[0,Math.PI/2],loc:[1,1]},
+			{color:"purple",x:[100,150],y:[340,340],theta:[0,0],loc:[1,1]}
 			]},
 			
 		{levelText:"REFLECTION",
@@ -208,8 +208,8 @@ levels=[
 		flagX:420,
 		flagY:355,
 		flagTheta:Math.PI,
-		portals:[{color:"red",x:[200,200],y:[30,160],theta:[0,0]},
-			{color:"cyan",x:[420,420],y:[30,260],theta:[0,0]},
-			{color:"yellow",x:[260,120],y:[30,375],theta:[0,0]}]}
+		portals:[{color:"red",x:[200,200],y:[30,160],theta:[0,0],loc:[-1,-1]},
+			{color:"cyan",x:[420,420],y:[30,258],theta:[0,0],loc:[-1,-1]},
+			{color:"yellow",x:[260,120],y:[30,375],theta:[0,0],loc:[-1,-1]}]}
 			
 ]
