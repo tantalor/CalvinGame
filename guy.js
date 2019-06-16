@@ -92,7 +92,8 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 					guy.x=f.x+f.width/2;
 					pressed=N;
 					gravity=-gravity;
-					drawBackground(level,gravity);
+					pause=true;
+					drawFlip(level,gravity);
 					guy.y=480-(guy.y-5);
 					flipWait=true;
 				}
@@ -158,7 +159,6 @@ function checkPortal(level, guy, upWait, flipWait, gravity){
 	return makeMove(level, guy, upWait, flipWait, gravity);
 	
 }
-
 
 
 

@@ -66,3 +66,18 @@ function drawPortals(ctx,level,gravity){
 		ctx.setTransform(1,0,0,1,0,0);
 	}
 }
+
+
+
+function drawFlip(level, gravity){
+	var step=0.08;
+	var count=25;
+	var c=setInterval(function(){
+		drawBackground(level,gravity*(1-count*step));
+		count-=1;
+		if(count==-1){
+			clearInterval(c);
+			pause=false;
+		}
+	},10)
+}

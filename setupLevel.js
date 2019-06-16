@@ -1,4 +1,5 @@
 var {cos, sin, tan, abs, pow, atan}=Math;
+var pause=false;
 
 
 document.getElementById("levelsButton").onclick=function(){
@@ -60,29 +61,31 @@ function setup(level){
 	var flipWait=false;
 			
 	var a=setInterval(function(){
-		[___, upWait, flipWait,gravity]=move(level,guy,upWait,flipWait,gravity);
-		if(gravity==0){
-			alert("Oh no! You should probably try that again.");
-			clearInterval(a);
-			setup(level);
-		}
-		solved=checkFlag(guy,level,gravity);
-		if(solved){
-			clearInterval(a);
-			if(level==levels.length-1){
-				alert("Congratulations! You won the game!!");
-			}else if(level==5){
-				alert("You've completed the tutorial! Now on to the game.")
+		if(!pause){
+			[___, upWait, flipWait,gravity]=move(level,guy,upWait,flipWait,gravity);
+			if(gravity==0){
+				alert("Oh no! You should probably try that again.");
 				clearInterval(a);
-				level+=1;
 				setup(level);
-			}else{
-				alert("Good job! Try the next level.");
-				clearInterval(a);
-				level+=1;
-				setup(level);	
 			}
-		}		
+			solved=checkFlag(guy,level,gravity);
+			if(solved){
+				clearInterval(a);
+				if(level==levels.length-1){
+					alert("Congratulations! You won the game!!");
+				}else if(level==5){
+					alert("You've completed the tutorial! Now on to the game.")
+					clearInterval(a);
+					level+=1;
+					setup(level);
+				}else{
+					alert("Good job! Try the next level.");
+					clearInterval(a);
+					level+=1;
+					setup(level);	
+				}
+			}
+		}
 	}, 10)
 	
 }
