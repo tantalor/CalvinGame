@@ -20,9 +20,14 @@ function drawFloor(ctx,level,gravity){
 		ctx.translate(f.x,240*(1-gravity)+gravity*f.y);
 		ctx.rotate(gravity*f.theta);
 		
-		if(f.type=="floor"||f.type=="wall"){
+		if(f.type=="floor"){
 			ctx.fillStyle="black";
 			ctx.fillRect(0,0,f.width,2);
+		}else if(f.type=="wall"){
+			ctx.rotate(-gravity*f.theta);
+			ctx.rotate(Math.sign(gravity)*f.theta);
+			ctx.fillStyle="black";
+			ctx.fillRect(0,0,abs(gravity)*f.width,2);
 		}else if(f.type=="bridge"){
 			ctx.beginPath();
 			ctx.strokeStyle="#a0522d";
@@ -77,5 +82,5 @@ function drawFlip(level, gravity){
 			clearInterval(c);
 			pause=false;
 		}
-	},10)
+	},15)
 }
