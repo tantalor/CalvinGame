@@ -262,7 +262,7 @@ levels=[
 		flagTheta:0,
 		portals:[{color:"red",x:[130,170],y:[285,185],theta:[0,0],loc:[-1,-1]},
 			{color:"red",x:[170,265],y:[265,185],theta:[0,0],loc:[1,-1]},
-			{color:"red",x:[240,215],y:[265,185],theta:[0,0],loc:[1,-1]},
+			{color:"red",x:[230,215],y:[265,185],theta:[0,0],loc:[1,-1]},
 			{color:"red",x:[265,130],y:[265,185],theta:[0,0],loc:[1,-1]},
 			{color:"red",x:[300,100],y:[265,215],theta:[0,Math.PI/2],loc:[1,1]},
 			{color:"red",x:[110,300],y:[165,185],theta:[0,0],loc:[1,-1]}]}
