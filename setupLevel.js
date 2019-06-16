@@ -29,7 +29,12 @@ function setup(level){
 	var gravity=1;
 	
 	drawBackground(level,gravity);
-	document.getElementById("levelMessage").innerText=levels[level].levelText;
+	if(level>5){
+		document.getElementById("levelMessage").innerText=(level-5)+". "+levels[level].levelText;
+	}else{
+		document.getElementById("levelMessage").innerText=levels[level].levelText;		
+	}
+
 	
 	document.getElementById("backOne").onclick=function(){
 		clearInterval(a);

@@ -17,15 +17,13 @@ function drawBackground(level,gravity){
 
 function drawFloor(ctx,level,gravity){
 	for(f of levels[level].floor){
+		ctx.translate(f.x,240*(1-gravity)+gravity*f.y);
+		ctx.rotate(gravity*f.theta);
+		
 		if(f.type=="floor"||f.type=="wall"){
-			ctx.translate(f.x,240*(1-gravity)+gravity*f.y);
-			ctx.rotate(gravity*f.theta);
 			ctx.fillStyle="black";
 			ctx.fillRect(0,0,f.width,2);
-			ctx.setTransform(1,0,0,1,0,0)
 		}else if(f.type=="bridge"){
-			ctx.translate(f.x,240*(1-gravity)+gravity*f.y);
-			ctx.rotate(gravity*f.theta);
 			ctx.beginPath();
 			ctx.strokeStyle="#a0522d";
 			var a=4;
@@ -35,10 +33,7 @@ function drawFloor(ctx,level,gravity){
 			ctx.stroke();
 			ctx.closePath();
 
-			ctx.setTransform(1,0,0,1,0,0)
 		}else if(f.type=="flip"){
-			ctx.translate(f.x,240*(1-gravity)+gravity*f.y);
-			ctx.rotate(gravity*f.theta);
 			ctx.font="15px Arial";
 			ctx.strokeStyle="blue";
 			var sine = '';
@@ -46,8 +41,8 @@ function drawFloor(ctx,level,gravity){
 				sine = sine+'\u223F';
 			}
 			ctx.strokeText(sine,0,2);
-			ctx.setTransform(1,0,0,1,0,0);
 		}
+		ctx.setTransform(1,0,0,1,0,0)
 	}
 	
 }
