@@ -37,8 +37,12 @@ function setup(level){
 	
 	document.getElementById("forwardOne").onclick=function(){
 		clearInterval(a);
-		pressed=N;
 		setup(level+1);
+	}
+	
+	document.getElementById("startOver").onclick=function(){
+		clearInterval(a);
+		setup(level);
 	}
 	
 	var guyCanvas=document.getElementById("guyCanvas");
@@ -67,7 +71,6 @@ function setup(level){
 			clearInterval(a);
 			if(level==levels.length-1){
 				alert("Congratulations! You won the game!!");
-				level+=1;
 			}else if(level==5){
 				alert("You've completed the tutorial! Now on to the game.")
 				clearInterval(a);

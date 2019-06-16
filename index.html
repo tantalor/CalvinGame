@@ -14,20 +14,18 @@
 <br>
 <button type="button" class="intro" id="levelsButton">Straight to the Game!</button> 
 
-<br>
-<br>
 <div id="levelMessage" height="500px"> </div>
-<div>
-<canvas id="floorCanvas" width="480" height="480" style="position: absolute; left: 300; top: 100; z-index: 0;"></canvas>
 
-<canvas id="guyCanvas" width="480" height="480" style="position: absolute; left: 300; top: 100; z-index: 0;"></canvas>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-<div style="margin-top:100px">
-<button name="playing" style="display:none" type="button" id="startOver">Start Level Over</button>
-<button name="playing" style="display:none" type="button" id="backOne">Back One Level</button>	
-<button name="playing" style="display:none" type="button" id="forwardOne">Forward One Level</button>	
+<button name="playing" style="display:none; position:absolute; left:500; top:100" type="button" id="startOver">Start Level Over</button>
+<button name="playing" style="display:none; position:absolute; left:300; top:100" type="button" id="backOne">Back One Level</button>	
+<button name="playing" style="display:none; position:absolute; left:700; top:100" type="button" id="forwardOne">Forward One Level</button>	
 </div>
+
+<div>
+<canvas id="floorCanvas" width="480" height="480" style="position: absolute; left: 300; top: 130; z-index: 0;"></canvas>
+
+<canvas id="guyCanvas" width="480" height="480" style="position: absolute; left: 300; top: 130; z-index: 0;"></canvas>
+
 </center>
 
 <script src="levels.js"></script>
