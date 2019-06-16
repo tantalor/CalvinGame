@@ -1,9 +1,6 @@
 document.addEventListener("keydown",keyDownHandler,false);
 document.addEventListener("keyup", keyUpHandler, false);
-var N=0;
-var R=1;
-var L=-1;
-var U=3;
+var N=0, R=1, L=-1, U=3;
 
 var pressed=N;
 
