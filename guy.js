@@ -129,7 +129,7 @@ function drawGuy(guy){
 
 function checkFlag(guy,level,gravity){
 	if(pow(guy.x-levels[level].flagX,2)+pow(guy.y-(240*(1-gravity)+gravity*levels[level].flagY),2)<100
-		&& (abs(guy.theta-gravity*(levels[level].flagTheta))<2 || (guy.theta==0 && gravity==-1 && levels[level].flagTheta==Math.PI))){
+		&& (abs(guy.theta-(Math.PI/2*(1-gravity)+gravity*levels[level].flagTheta))<2 )){
 		
 		return true;
 		}else{return false;}

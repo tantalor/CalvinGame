@@ -36,11 +36,14 @@ function drawFloor(ctx,level,gravity){
 		}else if(f.type=="flip"){
 			ctx.font="15px Arial";
 			ctx.strokeStyle="blue";
-			var sine = '';
-			for(var i=0;i<f.width/9;i++){
-				sine = sine+'\u223F';
+			var Rad=2;
+			for(var i=0;i<f.width/8;i++){
+				ctx.beginPath();
+				ctx.arc(Rad+8*i,0,Rad,Math.PI,2*Math.PI);					
+				ctx.arc(3*Rad+8*i,0,Rad,0,Math.PI);
+				ctx.stroke();
+				ctx.closePath();
 			}
-			ctx.strokeText(sine,0,2);
 		}
 		ctx.setTransform(1,0,0,1,0,0)
 	}
