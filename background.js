@@ -52,7 +52,7 @@ function drawFloor(ctx,level,gravity){
 
 function drawPortals(ctx,level,gravity){
 	for(p of levels[level].portals){
-		ctx.translate(p.x[0]+20*sin(p.theta[0]),240*(1-gravity)+gravity*(p.y[0]-20*cos(p.theta[0])));
+		ctx.translate(p.x[0]+20*sin(p.theta[0])+5*(1-gravity),240*(1-gravity)+gravity*(p.y[0]-20*cos(p.theta[0])));
 		ctx.rotate(Math.PI/2*(1-gravity)+gravity*(p.theta[0]));
 		ctx.fillStyle=p.color;
 		ctx.fillRect(0,0,10,20);
