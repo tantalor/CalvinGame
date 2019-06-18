@@ -349,14 +349,15 @@ levels=[
 		
 		
 	{levelText:"DECISIONS, DECISIONS",
-	floor:[{x:110,y:30,width:30,theta:0,type:"flip"},
-		{x:140,y:30,width:230,theta:0,type:"floor"},
-		{x:370,y:30,width:30,theta:0,type:"flip"},
+	floor:[{x:90,y:30,width:20,theta:0,type:"flip"},
+		{x:110,y:30,width:280,theta:0,type:"floor"},
+		{x:390,y:30,width:20,theta:0,type:"flip"},
 		{x:80,y:70,width:40,theta:0,type:"floor"},
 		{x:140,y:70,width:60,theta:0,type:"floor"},
 		{x:200,y:70,width:40,theta:0,type:"flip"},
 		{x:200,y:100,width:50,theta:0,type:"floor"},
 		{x:80,y:140,width:70,theta:0,type:"floor"},
+		{x:150,y:140,width:40,theta:0,type:"flip"},
 		{x:220,y:140,width:30,theta:0,type:"flip"},
 		{x:250,y:140,width:90,theta:0,type:"floor"},
 		{x:340,y:140,width:40,theta:0,type:"flip"},
