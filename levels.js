@@ -321,12 +321,13 @@ levels=[
 		{x:450,y:50,width:400,theta:Math.PI/2,type:"wall"},
 		{x:50,y:450,width:30,theta:0,type:"floor"},
 		{x:120,y:450,width:60,theta:0,type:"floor"},
-		{x:180,y:450,width:40,theta:0,type:"flip"},
 		{x:220,y:450,width:60,theta:0,type:"floor"},
 		{x:280,y:450,width:40,theta:0,type:"flip"},
 		{x:320,y:450,width:100,theta:0,type:"floor"},
 		{x:250,y:50,width:400,theta:Math.PI/2,type:"wall"},
-		{x:50,y:250,width:350,theta:0,type:"floor"},
+		{x:50,y:250,width:150,theta:0,type:"floor"},
+		{x:200,y:250,width:20,theta:0,type:"flip"},
+		{x:220,y:250,width:180,theta:0,type:"floor"},
 		{x:400,y:250,width:30,theta:0,type:"flip"},
 		{x:430,y:250,width:20,theta:0,type:"floor"},
 		{x:150,y:250,width:200,theta:Math.PI/2,type:"wall"},
@@ -359,5 +360,5 @@ levels=[
 		{color:"red",x:[170,75],y:[188,110],theta:[0,0],loc:[1,1]},
 		{color:"blue",x:[200,300],y:[110,70],theta:[0,0],loc:[1,-1]},
 		{color:"green",x:[375,275],y:[70,270],theta:[0,0],loc:[-1,-1]},
-		{color:"green",x:[425,200],y:[70,270],theta:[0,0],loc:[-1,-1]}]}
+		{color:"green",x:[425,210],y:[70,270],theta:[0,0],loc:[-1,-1]}]}
 ]
