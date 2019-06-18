@@ -34,7 +34,7 @@ function move(level, guy, upWait, flipWait, gravity){
 						||(gravity==-1 && guy.y>480-f.y-f.width+1 && guy.y<480-f.y+2)){
 						if(guy.x-f.x<2 && 0<guy.x-f.x && pressed==L){
 							wall=true;
-						}else if(f.x-guy.x<10 && 0<f.x-guy.x && pressed==R){
+						}else if(f.x-guy.x<8 && 0<f.x-guy.x && pressed==R){
 							wall=true;
 						}
 					}
