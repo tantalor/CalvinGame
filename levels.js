@@ -368,8 +368,8 @@ levels=[
 		{x:80,y:270,width:220,theta:0,type:"floor"},
 		{x:340,y:270,width:40,theta:0,type:"floor"},
 		{x:30,y:340,width:120,theta:0,type:"floor"},
-		{x:225,y:340,width:105,theta:0,type:"floor"},
-		{x:330,y:340,width:40,theta:0,type:"flip"},
+		{x:225,y:340,width:125,theta:0,type:"floor"},
+		{x:350,y:340,width:20,theta:0,type:"flip"},
 		{x:370,y:340,width:30,theta:0,type:"floor"},
 		{x:200,y:425,width:250,theta:0,type:"floor"},
 		{x:80,y:50,width:21,theta:Math.PI/2,type:"wall"},
@@ -384,5 +384,5 @@ levels=[
 	flagX:200,
 	flagY:220,
 	flagTheta:Math.PI,
-	portals:[{color:"blue",x:[125,400],y:[180,425],theta:[0,0],loc:[1,1]}]}
+	portals:[{color:"blue",x:[125,410],y:[180,425],theta:[0,0],loc:[1,1]}]}
 ]
