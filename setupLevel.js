@@ -56,7 +56,7 @@ function setup(level){
 	
 	var guy={x:levels[level].x, 
 		y: levels[level].y,
-		theta:levels[level].theta,
+		theta:0,
 		fallingFrames:0,
 		canvas:guyCanvas,
 		ctx:guyctx}
