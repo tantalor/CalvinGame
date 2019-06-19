@@ -34,7 +34,7 @@ function move(level, guy, upWait, flipWait, gravity){
 						||(gravity==-1 && guy.y>480-f.y-f.width+1 && guy.y<480-f.y+2)){
 						if(guy.x-f.x<2 && 0<guy.x-f.x && pressed==L){
 							wall=true;
-						}else if(f.x-guy.x<8 && 0<f.x-guy.x && pressed==R){
+						}else if(f.x-guy.x<12 && 0<f.x-guy.x && pressed==R){
 							wall=true;
 						}
 					}
@@ -144,7 +144,7 @@ function checkPortal(level, guy, upWait, flipWait, gravity){
 				guy.theta=gravity*p.theta[1];
 				upWait=true;
 				return makeMove(level, guy, upWait, flipWait, gravity)
-			}else	if((guy.x+5-p.x[1])*(guy.x+5-(p.x[1]+gravity*10))<0
+			}else	if((guy.x+5-p.x[1])*(guy.x+5-(p.x[1]+10))<0
 				&& (guy.y+2*gravity-(240*(1-gravity)+gravity*p.y[1]))*(guy.y+2*gravity-(20+240*(1-gravity)+gravity*p.y[1]))<0){
 					guy.x=p.x[0]-5+20*gravity*sin(p.theta[0]);
 					guy.y=240*(1-gravity)+gravity*p.y[0]-2*gravity*p.loc[0];;

@@ -62,7 +62,7 @@ function drawPortals(ctx,level,gravity){
 		ctx.fillStyle=p.color;
 		ctx.fillRect(0,0,10,20);
 		ctx.setTransform(1,0,0,1,0,0);
-		ctx.translate(p.x[1]+20*sin(p.theta[1]),240*(1-gravity)+gravity*(p.y[1]-20*cos(p.theta[1])));
+		ctx.translate(p.x[1]+20*sin(p.theta[1])+5*(1-gravity),240*(1-gravity)+gravity*(p.y[1]-20*cos(p.theta[1])));
 		ctx.rotate(Math.PI/2*(1-gravity)+gravity*(p.theta[1]));
 		ctx.fillStyle=p.color;
 		ctx.fillRect(0,0,10,20);
