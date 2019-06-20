@@ -74,7 +74,6 @@ function setup(level){
 	
 	document.getElementById("timer").innerHTML=time;
 	
-	
 	var a=setInterval(function(){
 		if(startClock){
 			time+=0.01;
