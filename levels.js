@@ -6,7 +6,8 @@ levels=[
 		flagX:280,
 		flagY:200,
 		flagTheta:0,
-		portals:[]},
+		portals:[],
+		score:2},
 		
 		{levelText:"TUTORIAL 2. You can go up an incline.",
 		floor:[{x:140,y:200,width:101,theta:0,type:"floor"},
@@ -17,7 +18,8 @@ levels=[
 		flagX:301,
 		flagY:164,
 		flagTheta:0,
-		portals:[]},
+		portals:[],
+		score:2},
 			
 		{levelText:"TUTORIAL 3. You can travel through a bridge.",
 		floor:[{x:160,y:200,width:101,theta:0,type:"floor"},
@@ -30,7 +32,8 @@ levels=[
 		flagX:190,
 		flagY:167,
 		flagTheta:0,
-		portals:[]},
+		portals:[],
+		score:3},
 		
 		{levelText:"TUTORIAL 4. You can go through portals by pressing the up button.",
 		floor:[{x:160,y:200,width:80,theta:0,type:"floor"},
@@ -40,7 +43,8 @@ levels=[
 		flagX:310,
 		flagY:200,
 		flagTheta:0,
-		portals:[{color:"red",x:[210,280],y:[200,200],theta:[0,0],loc:[1,1]}]},
+		portals:[{color:"red",x:[210,280],y:[200,200],theta:[0,0],loc:[1,1]}],
+		score:3},
 		
 		{levelText:"TUTORIAL 5. You can flip the world upside down.",
 			floor: [{x:226,y:290,width:40,theta:0,type:"floor"},
@@ -49,13 +53,14 @@ levels=[
 				{x:209,y:190,width:105,theta:0,type:"floor"},
 				{x:166,y:190,width:20,theta:0,type:"floor"},
 				{x:186,y:190,width:20,theta:0,type:"flip"},
-				{x:166,y:290,width:50,theta:0,type:"floor"}],
+				{x:166,y:290,width:40,theta:0,type:"floor"}],
 			x:231,
 			y:280,
 			flagX:176,
 			flagY:290,
 			flagTheta:0,
-			portals:[]},
+			portals:[],
+			score:4},
 			
 		{levelText: "TUTORIAL 6. Now you're ready for your first real level!",
 		floor: [{x:185,y:229,width:52,theta:Math.PI/2,type:"wall"},
@@ -76,7 +81,8 @@ levels=[
 		flagX:320,
 		flagY:280,
 		flagTheta:0,
-		portals:[{color:"orange",x:[135,205],y:[300,250],theta:[0,0],loc:[1,-1]}]},
+		portals:[{color:"orange",x:[135,205],y:[300,250],theta:[0,0],loc:[1,-1]}],
+		score:8},
 	
 		{levelText:"TAUNT",
 		floor:[{x:100,y:214,width:25,theta:0,type:"floor"},
@@ -98,8 +104,8 @@ levels=[
 		flagX:300,
 		flagY:265,
 		flagTheta:0,
-		portals:[]
-		},
+		portals:[],
+		score:6},
 		
 		{levelText:"GOLDEN SECTION",
 		floor:[{x:115,y:315,width:105,theta:0,type:"floor"},
@@ -122,7 +128,8 @@ levels=[
 		portals:[{color:"red",x:[160,130],y:[315,135],theta:[0,0],loc:[1,-1]},
 			{color:"orange",x:[130,180],y:[215,215],theta:[0,0],loc:[1,1]},
 			{color:"green",x:[230,280],y:[135,215],theta:[0,0],loc:[-1,1]},
-			{color:"cyan",x:[276,300],y:[235,135],theta:[0,0],loc:[-1,-1]}]},
+			{color:"cyan",x:[276,300],y:[235,135],theta:[0,0],loc:[-1,-1]}],
+		score:7},
 
 			{levelText:"REFLECTION",
 			floor:[{x:130,y:130,width:101,theta:0,type:"floor"},
@@ -145,7 +152,8 @@ levels=[
 			flagX:150,
 			flagY:190,
 			flagTheta:Math.PI,
-			portals:[]},
+			portals:[],
+			score:12},
 
 		{levelText:"FLOATING ISLANDS",
 		floor:[{x:60, y:180, width:60, theta:0, type:"floor"},
@@ -174,7 +182,8 @@ levels=[
 		flagX:360,
 		flagY:350,
 		flagTheta:0,
-		portals:[]},
+		portals:[],
+		score:10},
 		
 		{levelText:"HALL OF DOORS",
 		floor:[{x:10,y:80,width:393,theta:0,type:"floor"},
@@ -211,7 +220,8 @@ levels=[
 			{color:"magenta", x:[200,240],y:[100,140],theta:[0,0],loc:[-1,1]},
 			{color:"orange",x:[450,10],y:[340,180],theta:[0,Math.PI/2],loc:[1,1]},
 			{color:"purple",x:[100,150],y:[340,340],theta:[0,0],loc:[1,1]}
-			]},
+			],
+		score:18},
 		
 		{levelText:"CRAZY SHADOWS",
 		floor:[{x:30,y:10,width:260,theta:0,type:"floor"},
@@ -248,7 +258,8 @@ levels=[
 		flagTheta:Math.PI,
 		portals:[{color:"red",x:[200,200],y:[30,160],theta:[0,0],loc:[-1,-1]},
 			{color:"cyan",x:[420,420],y:[30,258],theta:[0,0],loc:[-1,-1]},
-			{color:"yellow",x:[260,120],y:[30,375],theta:[0,0],loc:[-1,-1]}]},
+			{color:"yellow",x:[260,120],y:[30,375],theta:[0,0],loc:[-1,-1]}],
+		score:23},
 			
 		{levelText:"HOUSE",
 		floor:[{x:20,y:430,width:440,theta:0,type:"floor"},
@@ -278,7 +289,8 @@ levels=[
 		flagY:120,
 		flagTheta:Math.PI,
 		portals:[{color:"green",x:[150,405],y:[200,200],theta:[0,0],loc:[1,1]},
-			{color:"pink",x:[50,430],y:[430,430],theta:[0,0],loc:[1,1]}]},
+			{color:"pink",x:[50,430],y:[430,430],theta:[0,0],loc:[1,1]}],
+		score:12},
 			
 		{levelText:"MYSTERY",
 		floor:[{x:100,y:265,width:240,theta:0,type:"floor"},
@@ -301,7 +313,8 @@ levels=[
 			{color:"red",x:[230,215],y:[265,185],theta:[0,0],loc:[1,-1]},
 			{color:"red",x:[265,130],y:[265,185],theta:[0,0],loc:[1,-1]},
 			{color:"red",x:[300,100],y:[265,215],theta:[0,Math.PI/2],loc:[1,1]},
-			{color:"red",x:[110,300],y:[165,185],theta:[0,0],loc:[1,-1]}]},
+			{color:"red",x:[110,300],y:[165,185],theta:[0,0],loc:[1,-1]}],
+		score:9},
 			
 			
 	{levelText:"DOUBLE DOORS",
@@ -350,7 +363,8 @@ levels=[
 		{color:"red",x:[170,75],y:[188,110],theta:[0,0],loc:[1,1]},
 		{color:"blue",x:[200,300],y:[110,70],theta:[0,0],loc:[1,-1]},
 		{color:"green",x:[375,275],y:[70,270],theta:[0,0],loc:[-1,-1]},
-		{color:"green",x:[425,210],y:[70,270],theta:[0,0],loc:[-1,-1]}]},
+		{color:"green",x:[425,210],y:[70,270],theta:[0,0],loc:[-1,-1]}],
+	score:25},
 		
 		
 	{levelText:"DECISIONS, DECISIONS",
@@ -384,13 +398,14 @@ levels=[
 		{x:30,y:320,width:21,theta:Math.PI/2,type:"wall"},
 		{x:420,y:320,width:21,theta:Math.PI/2,type:"wall"},
 		{x:200,y:405,width:20,theta:Math.PI/2,type:"wall"},
-		{x:450,y:405,width:20,theta:Math.PI/2,type:"wall"}		],
+		{x:450,y:405,width:20,theta:Math.PI/2,type:"wall"}],
 	x:130,
 	y:218,
 	flagX:200,
 	flagY:220,
 	flagTheta:Math.PI,
-	portals:[{color:"blue",x:[125,410],y:[180,425],theta:[0,0],loc:[1,1]}]},
+	portals:[{color:"blue",x:[125,410],y:[180,425],theta:[0,0],loc:[1,1]}],
+	score:17},
 	
 	{levelText:"THE TRIAL",
 	floor:[{x:50,y:50,width:151,theta:Math.PI/2,type:"wall"},
@@ -448,7 +463,8 @@ levels=[
 		{color:"lime",x:[255,290],y:[451,450],theta:[0,0],loc:[-1,1]},
 		{color:"lime",x:[320,425],y:[450,70],theta:[0,0],loc:[1,-1]},
 		{color:"lime",x:[350,185],y:[450,120],theta:[0,0],loc:[1,-1]},
-		{color:"grey",x:[355,428],y:[125,145],theta:[0,0],loc:[1,-1]}]},
+		{color:"grey",x:[355,428],y:[125,145],theta:[0,0],loc:[1,-1]}],
+	score:38},
 		
 	{levelText:"RED HERRING",
 	floor:[{x:100,y:430,width:25,theta:0,type:"floor"},
@@ -498,5 +514,6 @@ levels=[
 	portals:[{color:"fuchsia",x:[106,285],y:[90,310],theta:[0,0],loc:[-1,1]},
 		{color:"blue",x:[165,365],y:[90,410],theta:[0,0],loc:[-1,1]},
 		{color:"red",x:[185,305],y:[290,350],theta:[0,0],loc:[1,-1]},
-		{color:"lime",x:[265,305],y:[370,90],theta:[0,0],loc:[1,-1]}]}
+		{color:"lime",x:[265,305],y:[370,90],theta:[0,0],loc:[1,-1]}],
+	score:30}
 ]
