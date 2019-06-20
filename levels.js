@@ -304,7 +304,7 @@ levels=[
 			{color:"red",x:[110,300],y:[165,185],theta:[0,0],loc:[1,-1]}]},
 			
 			
-	{levelText:"WEAK SAUCE",
+	{levelText:"DOUBLE DOORS",
 	floor:[{x:50,y:50,width:400,theta:0,type:"floor"},
 		{x:50,y:50,width:400,theta:Math.PI/2,type:"wall"},
 		{x:450,y:50,width:400,theta:Math.PI/2,type:"wall"},
