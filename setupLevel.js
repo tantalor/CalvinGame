@@ -29,6 +29,7 @@ document.getElementById("tutorialButton").onclick=function() {
 
 function setup(level){
 	pressed=N;
+	var startClock=false;
 	var gravity=1;
 	document.getElementById("score").innerHTML=score;
 	
@@ -70,13 +71,19 @@ function setup(level){
 	var solved=false;
 	var upWait=false;
 	var flipWait=false;
-		
+	
+	document.getElementById("timer").innerHTML=time;
+	
+	
 	var a=setInterval(function(){
-		time+=0.01;
-		time=Math.round(time*100)/100
-		document.getElementById("timer").innerHTML=time;
+		if(startClock){
+			time+=0.01;
+			time=Math.round(time*100)/100
+			document.getElementById("timer").innerHTML=time;
+		}
 		
 		if(!pause){
+			if(pressed!=N){startClock=true;}
 			[___, upWait, flipWait,gravity]=move(level,guy,upWait,flipWait,gravity);
 			if(gravity==0){
 				alert("Oh no! You should probably try that again.");

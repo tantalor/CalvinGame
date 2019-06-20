@@ -1,5 +1,5 @@
 levels=[
-	{levelText:"TUTORIAL 1. Move to the goal. No jumping.",
+	{levelText:"TUTORIAL 1. Move to the goal. No jumping. The faster you complete the level, the more points you get!",
 		floor: [{x:195,y:200,width:100,theta:0,type:"floor"}],
 		x:200,
 		y:180,
