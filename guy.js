@@ -64,7 +64,9 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 		if(f.type!="wall" && guy.x-5<f.width*cos(gravity*f.theta)+f.x
 			&& guy.x>f.x-8
 			&&guy.y-(240*(1-gravity)+gravity*f.y)-abs(guy.x-5-f.x)*tan(gravity*f.theta)<2){
-			if(guy.y-(240*(1-gravity)+gravity*f.y)-abs(guy.x-5-f.x)*tan(gravity*f.theta)>1){
+			if(guy.y-(240*(1-gravity)+gravity*f.y)-abs(guy.x-5-f.x)*tan(gravity*f.theta)>1
+				&& !(gravity*f.theta<0 && pressed==L)
+				&& !(gravity*f.theta>0 && pressed==R)){
 				guy.y-=1;
 				if(gravity*f.theta<-Math.PI/4){guy.y-=1;}
 				safe=true;
