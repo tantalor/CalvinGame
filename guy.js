@@ -34,7 +34,7 @@ function move(level, guy, upWait, flipWait, gravity){
 						||(gravity==-1 && guy.y>480-f.y-f.width+1 && guy.y<480-f.y+2)){
 						if(guy.x-f.x<2 && 0<guy.x-f.x && pressed==L){
 							wall=true;
-						}else if(f.x-guy.x<12 && 0<f.x-guy.x && pressed==R){
+						}else if(f.x-guy.x<8 && 0<f.x-guy.x && pressed==R){
 							wall=true;
 						}
 					}
@@ -119,7 +119,7 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 
 
 function drawGuy(guy){
-	guy.ctx.translate(guy.x,guy.y);
+	guy.ctx.translate(guy.x-4,guy.y);
 	guy.ctx.rotate(guy.theta);
 	guy.ctx.font = "20px Arial";
 	guy.ctx.strokeStyle="black";
@@ -128,7 +128,7 @@ function drawGuy(guy){
 }
 
 function checkFlag(guy,level,gravity){
-	if(pow(guy.x-levels[level].flagX,2)+pow(guy.y-(240*(1-gravity)+gravity*levels[level].flagY),2)<100
+	if(pow(guy.x-4-levels[level].flagX,2)+pow(guy.y-(240*(1-gravity)+gravity*levels[level].flagY),2)<100
 		&& (abs(guy.theta-(Math.PI/2*(1-gravity)+gravity*levels[level].flagTheta))<2 )){
 		
 		return true;
@@ -137,16 +137,16 @@ function checkFlag(guy,level,gravity){
 
 function checkPortal(level, guy, upWait, flipWait, gravity){
 	for(p of levels[level].portals){
-			if((guy.x+5-p.x[0])*(guy.x+5-(p.x[0]+10))<0
+			if((guy.x+1-p.x[0])*(guy.x+1-(p.x[0]+10))<0
 			&& (guy.y+2*gravity-(240*(1-gravity)+gravity*p.y[0]))*(guy.y+2*gravity-(20+240*(1-gravity)+gravity*p.y[0]))<0){
-				guy.x=p.x[1]-5+20*gravity*sin(p.theta[1]);
+				guy.x=p.x[1]+1+20*gravity*sin(p.theta[1]);
 				guy.y=240*(1-gravity)+gravity*p.y[1]-2*gravity*p.loc[1];
 				guy.theta=gravity*p.theta[1];
 				upWait=true;
 				return makeMove(level, guy, upWait, flipWait, gravity)
-			}else	if((guy.x+5-p.x[1])*(guy.x+5-(p.x[1]+10))<0
+			}else	if((guy.x+1-p.x[1])*(guy.x+1-(p.x[1]+10))<0
 				&& (guy.y+2*gravity-(240*(1-gravity)+gravity*p.y[1]))*(guy.y+2*gravity-(20+240*(1-gravity)+gravity*p.y[1]))<0){
-					guy.x=p.x[0]-5+20*gravity*sin(p.theta[0]);
+					guy.x=p.x[0]+1+20*gravity*sin(p.theta[0]);
 					guy.y=240*(1-gravity)+gravity*p.y[0]-2*gravity*p.loc[0];;
 					guy.theta=gravity*p.theta[0];
 					upWait=true;

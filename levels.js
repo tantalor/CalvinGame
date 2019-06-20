@@ -253,7 +253,7 @@ levels=[
 		{levelText:"HOUSE",
 		floor:[{x:20,y:430,width:440,theta:0,type:"floor"},
 			{x:80,y:198,width:230,theta:Math.PI/2,type:"wall"},
-			{x:400,y:205,width:226,theta:Math.PI/2,type:"wall"},
+			{x:400,y:206,width:225,theta:Math.PI/2,type:"wall"},
 			{x:79,y:200,width:186,theta:-Math.PI/6,type:"floor"},
 			{x:240,y:107,width:146,theta:Math.PI/6,type:"floor"},
 			{x:80,y:275,width:108,theta:Math.PI/4,type:"floor"},
