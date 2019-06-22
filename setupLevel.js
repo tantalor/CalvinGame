@@ -4,7 +4,6 @@ var time=0;
 var score=0;
 var levelScores=new Array(levels.length).fill(0);
 
-
 document.getElementById("levelsButton").onclick=function(){
 	for(e of document.getElementsByClassName("intro")){
 		e.style.display="none";
@@ -37,7 +36,7 @@ function setup(level){
 	if(level>5){
 		document.getElementById("levelMessage").innerText=(level-5)+". "+levels[level].levelText;
 	}else{
-		document.getElementById("levelMessage").innerText=levels[level].levelText;		
+		document.getElementById("levelMessage").innerText=levels[level].levelText;
 	}
 
 	
@@ -61,7 +60,7 @@ function setup(level){
 	var guyCanvas=document.getElementById("guyCanvas");
 	var guyctx=guyCanvas.getContext("2d");
 	
-	var guy={x:levels[level].x, 
+	var guy={x:levels[level].x,
 		y: levels[level].y,
 		theta:0,
 		fallingFrames:0,
@@ -122,10 +121,12 @@ function setup(level){
 					clearInterval(a);
 					time=0;
 					level+=1;
-					setup(level);	
+					setup(level);
 				}
 			}
 		}
 	}, 10)
-	
+
+  editRefresh.setRedrawFunction(() => drawBackground(level,gravity));
 }
+	
