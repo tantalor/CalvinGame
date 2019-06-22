@@ -94,7 +94,7 @@ function setup(level){
 				var congrats="Good job! "
 				var scoreAcheived=(Math.round(50-time+levels[level].score));
 				if(scoreAcheived>50){scoreAcheived=50;}
-				if(scoreAcheived<0){scoreAcheived=10;}
+				if(scoreAcheived<10){scoreAcheived=10;}
 				if(levelScores[level]>scoreAcheived){
 					score-=scoreAcheived;
 				}else{
