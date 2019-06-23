@@ -6,8 +6,8 @@ function drawBackground(level,gravity){
 	drawPortals(bgctx,level,gravity);
 	drawFloor(bgctx,level,gravity);
 
-	bgctx.translate(levels[level].flagX,225*(1-gravity)+gravity*levels[level].flagY)
-	bgctx.rotate(Math.PI/2*(1-gravity)+gravity*levels[level].flagTheta);
+	bgctx.translate(levels[level].flag.x,225*(1-gravity)+gravity*levels[level].flag.y)
+	bgctx.rotate(Math.PI/2*(1-gravity)+gravity*levels[level].flag.theta);
 	bgctx.font="25px Arial";
 	bgctx.strokeStyle = 'black';
 	bgctx.lineWidth=1;
@@ -17,20 +17,23 @@ function drawBackground(level,gravity){
 
 
 function drawFloor(ctx,level,gravity){
+	for(w of levels[level].wall){
+		var width = w.bottom-w.top;
+		ctx.translate(w.x,225*(1-gravity)+gravity*w.top)
+		ctx.rotate(Math.sign(gravity)*Math.PI/2);
+		ctx.fillStyle="black";
+		ctx.fillRect(0,0,abs(gravity)*width,2);
+		ctx.setTransform(1,0,0,1,0,0)
+	}
+	
 	for(f of levels[level].floor){
-		var theta = Math.atan((f.b.y-f.a.y)/(f.b.x-f.a.x))
-		var width = Math.sqrt(pow(f.b.x-f.a.x,2)+pow(f.b.y-f.a.y,2))
-		ctx.translate(f.a.x,225*(1-gravity)+gravity*f.a.y);
+		var theta = Math.atan((f.right.y-f.left.y)/(f.right.x-f.left.x))
+		var width = Math.sqrt(pow(f.right.x-f.left.x,2)+pow(f.right.y-f.left.y,2))
+		ctx.translate(f.left.x,225*(1-gravity)+gravity*f.left.y);
 		ctx.rotate(gravity*theta);
-		
 		if(f.type=="floor"){
 			ctx.fillStyle="black";
 			ctx.fillRect(0,0,width,2);
-		}else if(f.type=="wall"){
-			ctx.rotate(-gravity*theta);
-			ctx.rotate(Math.sign(gravity)*theta);
-			ctx.fillStyle="black";
-			ctx.fillRect(0,0,abs(gravity)*width,2);
 		}else if(f.type=="bridge"){
 			ctx.beginPath();
 			ctx.strokeStyle="#a0522d";

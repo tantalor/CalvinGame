@@ -28,17 +28,16 @@ function move(level, guy, upWait, flipWait, gravity){
 			return makeMove(level, guy, true, flipWait, gravity);
 		}
 	}else{
-		for(f of levels[level].floor){
-			if(f.type=="wall"){
-				if((gravity==1 && guy.y-2>f.a.y+1 && guy.y<f.b.y+2)
-						||(gravity==-1 && guy.y-2>450-f.b.y+1 && guy.y<450-f.a.y+2)){
-						if(guy.x-f.a.x<2 && 0<guy.x-f.a.x && pressed==L){
+		for(w of levels[level].wall){
+			if((gravity==1 && guy.y-2>w.top+1 && guy.y<w.bottom+2)
+						||(gravity==-1 && guy.y-2>450-w.bottom+1 && guy.y<450-w.top+2)){
+						if(guy.x-w.x<2 && 0<guy.x-w.x && pressed==L){
 							wall=true;
-						}else if(f.a.x-guy.x<8 && 0<f.a.x-guy.x && pressed==R){
+						}else if(w.x-guy.x<8 && 0<w.x-guy.x && pressed==R){
 							wall=true;
 						}
 					}
-			}
+			
 		}
 		
 		if(pressed==R && !wall){
@@ -63,11 +62,10 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 	var frozen=false;
 
 	for(f of levels[level].floor){
-		var tan=gravity*(f.b.y-f.a.y)/(f.b.x-f.a.x);
-		if(f.type!="wall" && guy.x-5<f.b.x
-			&& guy.x>f.a.x-8
-			&&guy.y-225*(1-gravity)-gravity*f.a.y-abs(guy.x-5-f.a.x)*tan<3){
-			if(guy.y-225*(1-gravity)-gravity*f.a.y-abs(guy.x-5-f.a.x)*tan>1
+		var tan=gravity*(f.right.y-f.left.y)/(f.right.x-f.left.x);
+		if(guy.x-5<f.right.x && guy.x>f.left.x-8
+			&&guy.y-225*(1-gravity)-gravity*f.left.y-abs(guy.x-5-f.left.x)*tan<3){
+			if(guy.y-225*(1-gravity)-gravity*f.left.y-abs(guy.x-5-f.left.x)*tan>1
 			 && !(tan<0 && pressed==L)
 			 && !(tan>0 && pressed==R)){
 				guy.y-=1;
@@ -78,7 +76,7 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 					else if(pressed==L){guy.x+=1;}
 				}
 				if(f.type=="flip" && !flipWait){
-					guy.x=(f.b.x+f.a.x)/2;
+					guy.x=(f.right.x+f.left.x)/2;
 					pressed=N;
 					gravity = -gravity;
 					drawFlip(level,gravity);
@@ -87,15 +85,15 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 				}
 
 				guy.fallingFrames=0;
-				guy.theta=gravity*Math.atan((f.b.y-f.a.y)/(f.b.x-f.a.x));
+				guy.theta=gravity*Math.atan((f.right.y-f.left.y)/(f.right.x-f.left.x));
 			}
-			else if(guy.y-225*(1-gravity)-gravity*f.a.y-abs(guy.x-5-f.a.x)*tan>0){
+			else if(guy.y-225*(1-gravity)-gravity*f.left.y-abs(guy.x-5-f.left.x)*tan>0){
 				safe=true;
 				frozen=checkFrozen(guy,f,level,gravity);
-				guy.theta=gravity*Math.atan((f.b.y-f.a.y)/(f.b.x-f.a.x));
+				guy.theta=gravity*Math.atan((f.right.y-f.left.y)/(f.right.x-f.left.x));
 				guy.fallingFrames=0;
 				if(f.type=="flip" && !flipWait){
-					guy.x=(f.b.x+f.a.x)/2
+					guy.x=(f.right.x+f.left.x)/2
 					pressed=N;
 					gravity=-gravity;
 					pause=true;
@@ -112,7 +110,7 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 		if(pressed==R){guy.x-=1;}
 		else if(pressed==L){guy.x+=1;}
 		guy.fallingFrames +=1;
-		if(guy.fallingFrames==2){
+		if(guy.fallingFrames==4){
 			if(pressed==R){guy.x+=3;}
 			else if(pressed==L){guy.x-=1;}
 			guy.theta=0;
@@ -132,13 +130,12 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 function checkFrozen(guy,f,level,gravity){
 	for(w of levels[level].floor){
 		if(w!=f){
-			var tan=gravity*(w.b.y-w.a.y)/(w.b.x-w.a.x);
-			if(guy.x<w.b.x
-				&& guy.x>w.a.x
-				&& guy.y-225*(1-gravity)-gravity*w.a.y-abs(guy.x-5-w.a.x)*tan<20
-				&& guy.y-225*(1-gravity)-gravity*w.a.y-abs(guy.x-5-w.a.x)*tan>18.5
-				&& w.type!="bridge")
-				{console.log(guy.y-225*(1-gravity)-gravity*w.a.y-abs(guy.x-5-w.a.x)*tan)
+			var tan=gravity*(w.right.y-w.left.y)/(w.right.x-w.left.x);
+			if(guy.x<w.right.x
+				&& guy.x>w.left.x
+				&& guy.y-225*(1-gravity)-gravity*w.left.y-abs(guy.x-5-w.left.x)*tan<20
+				&& guy.y-225*(1-gravity)-gravity*w.left.y-abs(guy.x-5-w.left.x)*tan>18.5
+				&& w.type!="bridge"){
 					if(pressed==R){guy.x-=1;}
 					else if(pressed==L){guy.x+=1;}
 					return true;
@@ -155,8 +152,8 @@ function drawGuy(guy){
 }
 
 function checkFlag(guy,level,gravity){
-	if(pow(guy.x-4-levels[level].flagX,2)+pow(guy.y-(225*(1-gravity)+gravity*levels[level].flagY),2)<100
-		&& (abs(guy.theta-(Math.PI/2*(1-gravity)+gravity*levels[level].flagTheta))<2 )){
+	if(pow(guy.x-4-levels[level].flag.x,2)+pow(guy.y-(225*(1-gravity)+gravity*levels[level].flag.y),2)<100
+		&& (abs(guy.theta-(Math.PI/2*(1-gravity)+gravity*levels[level].flag.theta))<2 )){
 		
 		return true;
 		}else{return false;}

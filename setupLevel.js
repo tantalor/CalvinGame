@@ -61,8 +61,8 @@ function setup(level){
 	var guyCanvas=document.getElementById("guyCanvas");
 	var guyctx=guyCanvas.getContext("2d");
 	
-	var guy={x:levels[level].x, 
-		y: levels[level].y,
+	var guy={x:levels[level].startx, 
+		y: levels[level].starty,
 		theta:0,
 		fallingFrames:0,
 		canvas:guyCanvas,
