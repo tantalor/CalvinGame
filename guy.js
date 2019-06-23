@@ -60,6 +60,8 @@ function move(level, guy, upWait, flipWait, gravity){
 
 function makeMove(level, guy, upWait, flipWait, gravity){
 	var safe=false;
+	var frozen=false;
+
 	for(f of levels[level].floor){
 		var tan=gravity*(f.b.y-f.a.y)/(f.b.x-f.a.x);
 		if(f.type!="wall" && guy.x-5<f.b.x
@@ -70,8 +72,11 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 			 && !(tan>0 && pressed==R)){
 				guy.y-=1;
 				safe=true;
-				if(pressed==R){guy.x-=1;}
-				else if(pressed==L){guy.x+=1;}
+				frozen=checkFrozen(guy,f,level,gravity);
+				if(!frozen){
+					if(pressed==R){guy.x-=1;}
+					else if(pressed==L){guy.x+=1;}
+				}
 				if(f.type=="flip" && !flipWait){
 					guy.x=(f.b.x+f.a.x)/2;
 					pressed=N;
@@ -86,6 +91,7 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 			}
 			else if(guy.y-225*(1-gravity)-gravity*f.a.y-abs(guy.x-5-f.a.x)*tan>0){
 				safe=true;
+				frozen=checkFrozen(guy,f,level,gravity);
 				guy.theta=gravity*Math.atan((f.b.y-f.a.y)/(f.b.x-f.a.x));
 				guy.fallingFrames=0;
 				if(f.type=="flip" && !flipWait){
@@ -100,7 +106,7 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 			}
 		}
 	}
-	
+
 	if(!safe){
 		guy.y+=1;
 		if(pressed==R){guy.x-=1;}
@@ -115,9 +121,31 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 	if(guy.y>500){
 		gravity=0;
 	}
+	
 	guy.ctx.clearRect(0,0,guy.canvas.width,guy.canvas.height);
 	drawGuy(guy);
+	
 	return([guy,upWait, flipWait, gravity]);
+}
+
+
+function checkFrozen(guy,f,level,gravity){
+	for(w of levels[level].floor){
+		if(w!=f){
+			var tan=gravity*(w.b.y-w.a.y)/(w.b.x-w.a.x);
+			if(guy.x<w.b.x
+				&& guy.x>w.a.x
+				&& guy.y-225*(1-gravity)-gravity*w.a.y-abs(guy.x-5-w.a.x)*tan<20
+				&& guy.y-225*(1-gravity)-gravity*w.a.y-abs(guy.x-5-w.a.x)*tan>18.5
+				&& w.type!="bridge")
+				{console.log(guy.y-225*(1-gravity)-gravity*w.a.y-abs(guy.x-5-w.a.x)*tan)
+					if(pressed==R){guy.x-=1;}
+					else if(pressed==L){guy.x+=1;}
+					return true;
+				}
+			}
+		}
+		return false;
 }
 
 
