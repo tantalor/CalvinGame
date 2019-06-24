@@ -69,6 +69,7 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 			 && !(tan<0 && pressed==L)
 			 && !(tan>0 && pressed==R)){
 				guy.y-=1;
+		//		if(abs(tan)>1){guy.y-=1;}
 				safe=true;
 				frozen=checkFrozen(guy,f,level,gravity);
 				if(!frozen){
