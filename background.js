@@ -1,10 +1,11 @@
 function drawBackground(level,gravity){
 	var backgroundCanvas=document.getElementById("floorCanvas");
 	var bgctx = backgroundCanvas.getContext("2d");
+		
 	backgroundCanvas.style.letterSpacing = "-1px"
 	bgctx.clearRect(0,0,backgroundCanvas.width,backgroundCanvas.height);
 	drawPortals(bgctx,level,gravity);
-	drawFloor(bgctx,level,gravity);
+	drawStaticFloor(bgctx,level,gravity);
 
 	bgctx.translate(levels[level].flag.x,225*(1-gravity)+gravity*levels[level].flag.y)
 	bgctx.rotate(Math.PI/2*(1-gravity)+gravity*levels[level].flag.theta);
@@ -16,7 +17,7 @@ function drawBackground(level,gravity){
 }
 
 
-function drawFloor(ctx,level,gravity){
+function drawStaticFloor(ctx,level,gravity){
 	for(w of levels[level].wall){
 		var width = w.bottom-w.top;
 		ctx.translate(w.x,225*(1-gravity)+gravity*w.top)
@@ -31,7 +32,8 @@ function drawFloor(ctx,level,gravity){
 		var width = Math.sqrt(pow(f.right.x-f.left.x,2)+pow(f.right.y-f.left.y,2))
 		ctx.translate(f.left.x,225*(1-gravity)+gravity*f.left.y);
 		ctx.rotate(gravity*theta);
-		if(f.type=="floor"){
+		
+		if(f.type=="floor"||f.type=="move"){
 			ctx.fillStyle="black";
 			ctx.fillRect(0,0,width,2);
 		}else if(f.type=="bridge"){
@@ -63,6 +65,18 @@ function drawFloor(ctx,level,gravity){
 	}
 	
 }
+
+
+function drawMovingFloor(level, gravity){
+	var movingCanvas = document.getElementById("floorCanvas");
+	var movectx = movingCanvas.getContext("2d");
+	
+	movectx.clearRect(0,0,movingCanvas.width,movingCanvas.height);
+	
+	for(f of levels[level].floor){
+	}
+}
+
 
 function drawPortals(ctx,level,gravity){
 	for(p of levels[level].portals){

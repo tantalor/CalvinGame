@@ -69,13 +69,18 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 			 && !(tan<0 && pressed==L)
 			 && !(tan>0 && pressed==R)){
 				guy.y-=1;
-		//		if(abs(tan)>1){guy.y-=1;}
 				safe=true;
 				frozen=checkFrozen(guy,f,level,gravity);
 				if(!frozen){
 					if(pressed==R){guy.x-=1;}
 					else if(pressed==L){guy.x+=1;}
 				}
+				if(f.type=="move"){
+					[xupdate,yupdate]=f.guyChange(guy.time);
+					guy.x=guy.x-f.left.x+xupdate;
+					guy.y=guy.y-f.left.y+yupdate;
+				}
+				
 				if(f.type=="flip" && !flipWait){
 					guy.x=(f.right.x+f.left.x)/2;
 					pressed=N;
@@ -93,6 +98,11 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 				frozen=checkFrozen(guy,f,level,gravity);
 				guy.theta=gravity*Math.atan((f.right.y-f.left.y)/(f.right.x-f.left.x));
 				guy.fallingFrames=0;
+				if(f.type=="move"){
+					[xupdate,yupdate]=f.guyChange(guy.time);
+					guy.x=guy.x-f.left.x+xupdate;
+					guy.y=guy.y-f.left.y+yupdate;
+				}
 				if(f.type=="flip" && !flipWait){
 					guy.x=(f.right.x+f.left.x)/2
 					pressed=N;
@@ -122,7 +132,7 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 	}
 	
 	guy.ctx.clearRect(0,0,guy.canvas.width,guy.canvas.height);
-	drawGuy(guy);
+	drawGuy(guy,level,gravity);
 	
 	return([guy,upWait, flipWait, gravity]);
 }
@@ -147,7 +157,14 @@ function checkFrozen(guy,f,level,gravity){
 }
 
 
-function drawGuy(guy){
+function drawGuy(guy, level, gravity){
+	for(f of levels[level].floor){
+		if(f.type=="move"){
+			f.update(guy.time);
+		}
+	}
+	drawBackground(level, gravity);
+	
 	sprite.draw(guy);
 	sprite.update();
 }

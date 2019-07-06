@@ -66,8 +66,9 @@ function setup(level){
 		theta:0,
 		fallingFrames:0,
 		canvas:guyCanvas,
-		ctx:guyctx}
-	
+		ctx:guyctx,
+		time: 0}
+		
 	var solved=false;
 	var upWait=false;
 	var flipWait=false;
@@ -82,6 +83,7 @@ function setup(level){
 		}
 		
 		if(!pause){
+			guy.time +=1;
 			if(pressed!=N){startClock=true;}
 			[___, upWait, flipWait,gravity]=move(level,guy,upWait,flipWait,gravity);
 			if(gravity==0){
