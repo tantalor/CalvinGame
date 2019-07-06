@@ -863,11 +863,11 @@ var levels = [
 				this.right.x=325+100*sin(t/100+25*Math.PI);
 				this.right.y=225+100*cos(t/100+25*Math.PI);},
 			guyChange: function(t){
-				return([275+100*sin(t/100+25*Math.PI)+25*Math.PI,225+100*cos(t/100+25*Math.PI)+25*Math.PI]);
+				return([275+100*sin(t/100+25*Math.PI),225+100*cos(t/100+25*Math.PI)]);
 			}
 		}	],
-	wall:[{top:163,bottom:290,x:150},
-		{top:163,bottom:290,x:450}],
+	wall:[{top:161,bottom:290,x:150},
+		{top:161,bottom:290,x:450}],
 	flag:{x:350,y:75,theta:Math.PI},
 	portals:[],
 	startx:275,
