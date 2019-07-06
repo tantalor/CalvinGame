@@ -18,6 +18,7 @@ function keyUpHandler(e){
 	pressed=N;
 }
 
+
 function move(level, guy, upWait, flipWait, gravity){
 	var wall=false;
 	if(pressed==U){
@@ -29,11 +30,11 @@ function move(level, guy, upWait, flipWait, gravity){
 		}
 	}else{
 		for(w of levels[level].wall){
-			if((gravity==1 && guy.y-2>w.top+1 && guy.y<w.bottom+4)
-						||(gravity==-1 && guy.y-2>450-w.bottom+2 && guy.y<450-w.top+4)){
+			if((gravity==1 && guy.y-2>w.top+1 && guy.y<w.bottom+2)
+						||(gravity==-1 && guy.y-2>450-w.bottom+1 && guy.y<450-w.top+2)){
 						if(guy.x-w.x<2 && 0<guy.x-w.x && pressed==L){
 							wall=true;
-						}else if(w.x-guy.x<10 && 0<w.x-guy.x && pressed==R){
+						}else if(w.x-guy.x<8 && 0<w.x-guy.x && pressed==R){
 							wall=true;
 						}
 					}
