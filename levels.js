@@ -1,25 +1,13 @@
 var levels = [
   { levelText: "TUTORIAL 1. Move to the goal. No jumping. The faster you complete the level, the more points you get!",
     score: 2,
-    floor: [{left:{x: 200, y: 250}, right: {x: 400, y: 250}, type: "floor"},
-			{left: {x:150,y:250}, right: {x:200,y:250},type:"flip"},
-			{left: {x:200, y:155}, right: {x:250,y:155}, type: "move", 
-					update: function(t){
-						this.left.x = 200+50*sin(t/150);
-						this.left.y = 155+50*cos(t/150);
-						this.right.x=250+50*sin(t/150);
-						this.right.y=155+50*cos(t/150);},
-					guyChange: function(t){
-						return([200+50*sin(t/150),155+50*cos(t/150)]);
-					}
-				}
-    ],
-    wall: [],
-    flag: {x: 285, y: 225, theta: 0},
-    portals: [],
-    startx: 250,
-    starty: 150},
-
+   	 floor: [{left:{x: 200, y: 225}, right: {x: 400, y: 225}, type: "floor"}
+	    ],
+	    wall: [],
+	    flag: {x: 285, y: 225, theta: 0},
+	    portals: [],
+	    startx: 255,
+	    starty: 205},
 
   { levelText: "TUTORIAL 2. You can go up an incline.",
     score: 2,
@@ -837,7 +825,7 @@ var levels = [
 		score:60},
 		
 	{levelText:"TIMING",
-	score:25,
+	score:13,
 	floor:[{left:{x:149,y:163},right:{x:238,y:75},type:"floor"},
 		{left:{x:238,y:75},right:{x:363,y:75},type:"floor"},
 		{left:{x:363,y:75},right:{x:450,y:163},type:"floor"},
