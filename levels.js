@@ -840,7 +840,7 @@ var levels = [
 				this.left.y = 225+100*cos(t/100);
 				this.right.x=325+100*sin(t/100);
 				this.right.y=225+100*cos(t/100);},
-			guyChange: function(t){
+			guyChange: function(t,x,y){
 				return([275+100*sin(t/100),225+100*cos(t/100)]);
 			}
 		},
@@ -850,7 +850,7 @@ var levels = [
 				this.left.y = 225+100*cos(t/100+25*Math.PI);
 				this.right.x=325+100*sin(t/100+25*Math.PI);
 				this.right.y=225+100*cos(t/100+25*Math.PI);},
-			guyChange: function(t){
+			guyChange: function(t,x,y){
 				return([275+100*sin(t/100+25*Math.PI),225+100*cos(t/100+25*Math.PI)]);
 			}
 		}	],
@@ -958,7 +958,314 @@ var levels = [
       {color: "black", a:{x: 135, y: 360, theta: 0, loc: 1}, b: {x: 455, y: 230, theta: 0, loc: -1}}
     ],
     startx: 300,
-    starty: 113}
+    starty: 113},
+
+		{levelText: "FROGGER",
+		floor:[{left:{x:100,y:50},right:{x:130,y:50},type:"floor"},
+			{left:{x:0,y:200},right:{x:0,y:200},type:"move",
+			update: function(t){
+				if(2*t%300<100){
+					this.left.x = 300-2*t%100;
+					this.right.x = 299
+				}else if(2*t%300<200){
+					this.left.x = 200-2*t%100;
+					this.right.x = 299-2*t%100;
+				}else{
+					this.left.x=100;
+					this.right.x = 200-2*t%100;
+				}		
+			},
+			guyChange:function(t,x,y){
+				return([this.left.x-2,200]);
+			}},
+			
+			{left:{x:0,y:125},right:{x:0,y:125},type:"move",
+			update: function(t){
+				if(t%250<50){
+					this.left.x = 100;
+					this.right.x =100+ t%250
+				}else if(t%250<200){
+					this.left.x = 50+t%250;
+					this.right.x = 100+t%250;
+				}else{
+					this.left.x=250+t%50;
+					this.right.x = 299;
+				}		
+			},
+			guyChange:function(t,x,y){
+				return([this.left.x+1,125]);
+			}},
+			
+			{left:{x:0,y:125},right:{x:0,y:125},type:"move",
+			update: function(t){
+				if((t+85)%250<50){
+					this.left.x = 100;
+					this.right.x =100+ (t+85)%250
+				}else if((t+85)%250<200){
+					this.left.x = 50+(t+85)%250;
+					this.right.x = 100+(t+85)%250;
+				}else{
+					this.left.x=250+(t+85)%50;
+					this.right.x = 299;
+				}		
+			},
+			guyChange:function(t,x,y){
+				return([this.left.x+1,125]);
+			}},
+			
+			{left:{x:0,y:125},right:{x:0,y:125},type:"move",
+			update: function(t){
+				if((t+170)%250<50){
+					this.left.x = 100;
+					this.right.x =100+ (t+170)%250
+				}else if((t+170)%250<200){
+					this.left.x = 50+(t+170)%250;
+					this.right.x = 100+(t+170)%250;
+				}else{
+					this.left.x=250+(t+170)%50;
+					this.right.x = 299;
+				}		
+			},
+			guyChange:function(t,x,y){
+				return([this.left.x+1,125]);
+			}},
+			
+			{left:{x:0,y:275},right:{x:0,y:275},type:"move",
+			update: function(t){
+				if(t%230<30){
+					this.left.x = 100;
+					this.right.x =100+t%230
+				}else if(t%230<200){
+					this.left.x = 70+t%230;
+					this.right.x = 100+t%230;
+				}else{
+					this.left.x=70+t%230;
+					this.right.x = 299;
+				}		
+			},
+			guyChange:function(t,x,y){
+				return([this.left.x+1,275]);
+			}},
+			
+			{left:{x:0,y:275},right:{x:0,y:275},type:"move",
+			update: function(t){
+				if((t+56)%230<30){
+					this.left.x = 100;
+					this.right.x =100+(t+56)%230
+				}else if((t+56)%230<200){
+					this.left.x = 70+(t+56)%230;
+					this.right.x = 100+(t+56)%230;
+				}else{
+					this.left.x=70+(t+56)%230;
+					this.right.x = 299;
+				}		
+			},
+			guyChange:function(t,x,y){
+				return([this.left.x+1,275]);
+			}},
+			
+			{left:{x:0,y:275},right:{x:0,y:275},type:"move",
+			update: function(t){
+				if((t+112)%230<30){
+					this.left.x = 100;
+					this.right.x =100+(t+112)%230
+				}else if((t+112)%230<200){
+					this.left.x = 70+(t+112)%230;
+					this.right.x = 100+(t+112)%230;
+				}else{
+					this.left.x=70+(t+112)%230;
+					this.right.x = 299;
+				}		
+			},
+			guyChange:function(t,x,y){
+				return([this.left.x+1,275]);
+			}},		
+			
+			{left:{x:0,y:275},right:{x:0,y:275},type:"move",
+			update: function(t){
+				if((t+168)%230<30){
+					this.left.x = 100;
+					this.right.x =100+(t+168)%230
+				}else if((t+168)%230<200){
+					this.left.x = 70+(t+168)%230;
+					this.right.x = 100+(t+168)%230;
+				}else{
+					this.left.x=70+(t+168)%230;
+					this.right.x = 299;
+				}		
+			},
+			guyChange:function(t,x,y){
+				return([this.left.x+1,275]);
+			}},			
+				
+			{left:{x:260,y:400},right:{x:300,y:400},type:"floor"},
+			{left:{x:460,y:50},right:{x:500,y:50},type:"floor"},
+			{left:{x:375,y:400},right:{x:425,y:400},type:"floor"},
+			
+			{left:{x:0,y:225},right:{x:0,y:225},type:"move",
+				update: function(t){
+					if(1.5*t%275<75){
+						this.left.x = 300;
+						this.right.x = 299+1.5*t%275;
+					}else if(1.5*t%275<200){
+						this.left.x = 225+1.5*t%275;
+						this.right.x = 299+1.5*t%275;
+					}else{
+						this.left.x=225+1.5*t%275;
+						this.right.x = 500;
+					}		
+				},
+				guyChange:function(t,x,y){
+					return([this.left.x+1.5,225]);
+				}},
+			
+				{left:{x:0,y:225},right:{x:0,y:225},type:"move",
+					update: function(t){
+						if(1.5*(t+90)%275<75){
+							this.left.x = 300;
+							this.right.x = 299+1.5*(t+90)%275;
+						}else if(1.5*(t+90)%275<200){
+							this.left.x = 225+1.5*(t+90)%275;
+							this.right.x = 299+1.5*(t+90)%275;
+						}else{
+							this.left.x=225+1.5*(t+90)%275;
+							this.right.x = 500;
+						}		
+					},
+					guyChange:function(t,x,y){
+						return([this.left.x+1.5,225]);
+					}},
+			
+						{left:{x:0,y:350},right:{x:0,y:350},type:"move",
+						update: function(t){
+							if((2*t/3)%230<30){
+								this.left.x = 500-(2*t/3)%230;
+								this.right.x =500;
+							}else if((2*t/3)%230<200){
+								this.left.x = 500-(2*t/3)%230;
+								this.right.x = 530-(2*t/3)%230;
+							}else{
+								this.left.x=301;
+								this.right.x = 530-(2*t/3)%230;
+							}		
+						},
+						guyChange:function(t,x,y){
+							return([this.left.x-2/3,350]);
+						}},
+
+						{left:{x:0,y:350},right:{x:0,y:350},type:"move",
+						update: function(t){
+							if((2*t/3+56)%230<30){
+								this.left.x = 500-(2*t/3+56)%230;
+								this.right.x =500;
+							}else if((2*t/3+56)%230<200){
+								this.left.x = 500-(2*t/3+56)%230;
+								this.right.x = 530-(2*t/3+56)%230;
+							}else{
+								this.left.x=301;
+								this.right.x = 530-(2*t/3+56)%230;
+							}		
+						},
+						guyChange:function(t,x,y){
+							return([this.left.x-2/3,350]);
+						}},
+
+						{left:{x:0,y:350},right:{x:0,y:350},type:"move",
+						update: function(t){
+							if((2*t/3+112)%230<30){
+								this.left.x = 500-(2*t/3+112)%230;
+								this.right.x =500;
+							}else if((2*t/3+112)%230<200){
+								this.left.x = 500-(2*t/3+112)%230;
+								this.right.x = 530-(2*t/3+112)%230;
+							}else{
+								this.left.x=301;
+								this.right.x = 530-(2*t/3+112)%230;
+							}		
+						},
+						guyChange:function(t,x,y){
+							return([this.left.x-2/3,350]);
+						}},		
+
+						{left:{x:0,y:350},right:{x:0,y:350},type:"move",
+						update: function(t){
+							if((2*t/3+168)%230<30){
+								this.left.x = 500-(2*t/3+168)%230;
+								this.right.x =500;
+							}else if((2*t/3+168)%230<200){
+								this.left.x = 500-(2*t/3+168)%230;
+								this.right.x = 530-(2*t/3+168)%230;
+							}else{
+								this.left.x=301;
+								this.right.x = 530-(2*t/3+168)%230;
+							}		
+						},
+						guyChange:function(t,x,y){
+							return([this.left.x-2/3,350]);
+						}},
+						{left:{x:105,y:430},right:{x:495,y:430},type:"floor"},
+						
+						{left:{x:0,y:100},right:{x:0,y:100},type:"move",
+						update: function(t){
+							if((1/2*t)%250<50){
+								this.left.x = 300;
+								this.right.x =300+ (1/2*t)%250
+							}else if((1/2*t)%250<200){
+								this.left.x = 250+(1/2*t)%250;
+								this.right.x = 300+(1/2*t)%250;
+							}else{
+								this.left.x=450+(1/2*t)%50;
+								this.right.x = 499;
+							}		
+						},
+						guyChange:function(t,x,y){
+							return([this.left.x+1/2,100]);
+						}},
+
+						{left:{x:0,y:100},right:{x:0,y:100},type:"move",
+						update: function(t){
+							if((1/2*t+85)%250<50){
+								this.left.x = 300;
+								this.right.x =300+ (1/2*t+85)%250
+							}else if((1/2*t+85)%250<200){
+								this.left.x = 250+(1/2*t+85)%250;
+								this.right.x = 300+(1/2*t+85)%250;
+							}else{
+								this.left.x=450+(1/2*t+85)%50;
+								this.right.x = 499;
+							}		
+						},
+						guyChange:function(t,x,y){
+							return([this.left.x+1/2,100]);
+						}},
+
+						{left:{x:0,y:100},right:{x:0,y:100},type:"move",
+						update: function(t){
+							if((1/2*t+170)%250<50){
+								this.left.x = 300;
+								this.right.x =300+ (1/2*t+170)%250
+							}else if((1/2*t+170)%250<200){
+								this.left.x = 250+(1/2*t+170)%250;
+								this.right.x = 300+(1/2*t+170)%250;
+							}else{
+								this.left.x=450+(1/2*t+170)%50;
+								this.right.x = 499;
+							}		
+						},
+						guyChange:function(t,x,y){
+							return([this.left.x+1/2,100]);
+						}},
+			
+			],
+		wall:[{top:50,bottom:400,x:300},
+			{top:50,bottom:400,x:100},
+			{top:50,bottom:400,x:500}],
+		flag: {x:393,y:400,theta:0},
+		portals:[{color:"red",a:{x:275,y:400,theta:0,loc:1},b:{x:475,y:50,theta:0,loc:1}},
+			{color:"blue",a:{x:295,y:430,theta:0,loc:1},b:{x:110,y:50,theta:0,loc:1}}],
+		score:50,
+		startx:127,
+		starty:49 }
 
 
 

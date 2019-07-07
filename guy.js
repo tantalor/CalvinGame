@@ -20,7 +20,6 @@ function keyUpHandler(e){
 
 
 function move(level, guy, upWait, flipWait, gravity){
-	var wall=false;
 	if(pressed==U){
 		flipWait=false;
 		if(!upWait){
@@ -29,17 +28,8 @@ function move(level, guy, upWait, flipWait, gravity){
 			return makeMove(level, guy, true, flipWait, gravity);
 		}
 	}else{
-		for(w of levels[level].wall){
-			if((gravity==1 && guy.y-2>w.top+1 && guy.y<w.bottom+2)
-						||(gravity==-1 && guy.y-2>450-w.bottom+1 && guy.y<450-w.top+2)){
-						if(guy.x-w.x<2 && 0<guy.x-w.x && pressed==L){
-							wall=true;
-						}else if(w.x-guy.x<8 && 0<w.x-guy.x && pressed==R){
-							wall=true;
-						}
-					}
-			
-		}
+		var wall=false;
+		wall=checkWall(level, guy, gravity,pressed);
 		
 		if(pressed==R && !wall){
 			guy.x+=1;
@@ -56,6 +46,19 @@ function move(level, guy, upWait, flipWait, gravity){
 }
 
 
+function checkWall(level, guy, gravity,direction){
+	for(w of levels[level].wall){
+		if((gravity==1 && guy.y-2>w.top+1 && guy.y<w.bottom+2)
+					||(gravity==-1 && guy.y-2>450-w.bottom+1 && guy.y<450-w.top+2)){
+					if(guy.x-w.x<2 && 0<guy.x-w.x && direction==L){
+						return true;
+					}else if(w.x-guy.x<8 && 0<w.x-guy.x && direction==R){
+						return true;
+					}
+				}
+	}
+	return false;
+}
 
 
 function makeMove(level, guy, upWait, flipWait, gravity){
@@ -78,9 +81,15 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 					else if(pressed==L){guy.x+=1;}
 				}
 				if(f.type=="move"){
-					[xupdate,yupdate]=f.guyChange(guy.time);
-					guy.x=guy.x-f.left.x+xupdate;
-					guy.y=guy.y-f.left.y+yupdate;
+					var [xupdate,yupdate]=f.guyChange(guy.time,guy.x,guy.y);
+					var direction=N;
+					if(xupdate<f.left.x){direction=L;}
+					else{direction=R;}
+					var wall=checkWall(level,guy, gravity,direction);
+					if(!wall){
+						guy.x=guy.x-f.left.x+xupdate;
+						guy.y=guy.y-f.left.y+yupdate;
+					}
 				}
 				
 				if(f.type=="flip" && !flipWait){
@@ -101,9 +110,15 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 				guy.theta=gravity*Math.atan((f.right.y-f.left.y)/(f.right.x-f.left.x));
 				guy.fallingFrames=0;
 				if(f.type=="move"){
-					[xupdate,yupdate]=f.guyChange(guy.time);
-					guy.x=guy.x-f.left.x+xupdate;
-					guy.y=guy.y-f.left.y+yupdate;
+					var [xupdate,yupdate]=f.guyChange(guy.time,guy.x,guy.y);
+					var direction=N;
+					if(xupdate<f.left.x){direction=L;}
+					else{direction=R;}
+					var wall=checkWall(level,guy, gravity,direction);
+					if(!wall){
+						guy.x=guy.x-f.left.x+xupdate;
+						guy.y=guy.y-f.left.y+yupdate;
+					}
 				}
 				if(f.type=="flip" && !flipWait){
 					guy.x=(f.right.x+f.left.x)/2
@@ -149,8 +164,6 @@ function checkFrozen(guy,f,level,gravity){
 				&& guy.y-225*(1-gravity)-gravity*w.left.y-abs(guy.x-5-w.left.x)*tan<20
 				&& guy.y-225*(1-gravity)-gravity*w.left.y-abs(guy.x-5-w.left.x)*tan>18.5
 				&& w.type!="bridge"){
-					console.log(guy.y-225*(1-gravity)-gravity*w.left.y-abs(guy.x-5-w.left.x)*tan);
-					console.log("x"+guy.x+"y"+guy.y)
 					if(pressed==R){guy.x-=1;}
 					else if(pressed==L){guy.x+=1;}
 					return true;
