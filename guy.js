@@ -64,9 +64,10 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 
 	for(f of levels[level].floor){
 		var tan=gravity*(f.right.y-f.left.y)/(f.right.x-f.left.x);
+		var checky = guy.y-225*(1-gravity)-gravity*f.left.y-abs(guy.x-5-f.left.x)*tan;
 		if(guy.x-5<f.right.x && guy.x>f.left.x-8
-			&&guy.y-225*(1-gravity)-gravity*f.left.y-abs(guy.x-5-f.left.x)*tan<3){
-			if(guy.y-225*(1-gravity)-gravity*f.left.y-abs(guy.x-5-f.left.x)*tan>1
+			&&checky<3){
+			if(checky>1
 			 && !(tan<0 && pressed==L && guy.x-5-f.left.x<10)
 			 && !(tan>0 && pressed==R && f.right.x-guy.x-5<10)){
 				guy.y-=1;
@@ -92,9 +93,9 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 				}
 
 				guy.fallingFrames=0;
-				guy.theta=gravity*Math.atan((f.right.y-f.left.y)/(f.right.x-f.left.x));
+				guy.theta=gravity*Math.atan(gravity*tan);
 			}
-			else if(guy.y-225*(1-gravity)-gravity*f.left.y-abs(guy.x-5-f.left.x)*tan>-.1){
+			else if(checky>-.1){
 				safe=true;
 				frozen=checkFrozen(guy,f,level,gravity);
 				guy.theta=gravity*Math.atan((f.right.y-f.left.y)/(f.right.x-f.left.x));
@@ -148,6 +149,8 @@ function checkFrozen(guy,f,level,gravity){
 				&& guy.y-225*(1-gravity)-gravity*w.left.y-abs(guy.x-5-w.left.x)*tan<20
 				&& guy.y-225*(1-gravity)-gravity*w.left.y-abs(guy.x-5-w.left.x)*tan>18.5
 				&& w.type!="bridge"){
+					console.log(guy.y-225*(1-gravity)-gravity*w.left.y-abs(guy.x-5-w.left.x)*tan);
+					console.log("x"+guy.x+"y"+guy.y)
 					if(pressed==R){guy.x-=1;}
 					else if(pressed==L){guy.x+=1;}
 					return true;
