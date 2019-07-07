@@ -67,8 +67,8 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 		if(guy.x-5<f.right.x && guy.x>f.left.x-8
 			&&guy.y-225*(1-gravity)-gravity*f.left.y-abs(guy.x-5-f.left.x)*tan<3){
 			if(guy.y-225*(1-gravity)-gravity*f.left.y-abs(guy.x-5-f.left.x)*tan>1
-			 && !(tan<0 && pressed==L)
-			 && !(tan>0 && pressed==R)){
+			 && !(tan<0 && pressed==L && guy.x-5-f.left.x<10)
+			 && !(tan>0 && pressed==R && f.right.x-guy.x-5<10)){
 				guy.y-=1;
 				safe=true;
 				frozen=checkFrozen(guy,f,level,gravity);
@@ -94,7 +94,7 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 				guy.fallingFrames=0;
 				guy.theta=gravity*Math.atan((f.right.y-f.left.y)/(f.right.x-f.left.x));
 			}
-			else if(guy.y-225*(1-gravity)-gravity*f.left.y-abs(guy.x-5-f.left.x)*tan>0){
+			else if(guy.y-225*(1-gravity)-gravity*f.left.y-abs(guy.x-5-f.left.x)*tan>-.1){
 				safe=true;
 				frozen=checkFrozen(guy,f,level,gravity);
 				guy.theta=gravity*Math.atan((f.right.y-f.left.y)/(f.right.x-f.left.x));

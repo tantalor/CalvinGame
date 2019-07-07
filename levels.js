@@ -826,10 +826,10 @@ var levels = [
 		
 	{levelText:"TIMING",
 	score:13,
-	floor:[{left:{x:149,y:163},right:{x:238,y:75},type:"floor"},
+	floor:[{left:{x:149,y:164},right:{x:239,y:75},type:"floor"},
 		{left:{x:238,y:75},right:{x:363,y:75},type:"floor"},
 		{left:{x:363,y:75},right:{x:450,y:163},type:"floor"},
-		{left:{x:150,y:287},right:{x:238,y:375},type:"floor"},
+		{left:{x:149,y:287},right:{x:238,y:375},type:"floor"},
 		{left:{x:238,y:375},right:{x:363,y:375},type:"floor"},
 		{left:{x:363,y:375},right:{x:450,y:287},type:"floor"},
 		{left:{x:150,y:250},right:{x:170,y:250},type:"flip"},
@@ -854,8 +854,8 @@ var levels = [
 				return([275+100*sin(t/100+25*Math.PI),225+100*cos(t/100+25*Math.PI)]);
 			}
 		}	],
-	wall:[{top:161,bottom:290,x:150},
-		{top:161,bottom:290,x:450}],
+	wall:[{top:161,bottom:292,x:150},
+		{top:161,bottom:292,x:450}],
 	flag:{x:350,y:75,theta:Math.PI},
 	portals:[],
 	startx:275,
