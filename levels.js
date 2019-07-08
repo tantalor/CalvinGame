@@ -841,7 +841,7 @@ var levels = [
 				this.right.x=325+100*sin(t/100);
 				this.right.y=225+100*cos(t/100);},
 			guyChange: function(t,x,y){
-				return([x+100*sin(t/100),y+100*cos(t/100)]);
+				return([x-this.left.x+275+100*sin(t/100),y-this.left.y+225+100*cos(t/100)]);
 			}
 		},
 		{left:{x:0,y:0},right:{x:0,y:0},type:"move",
@@ -851,7 +851,7 @@ var levels = [
 				this.right.x=325+100*sin(t/100+25*Math.PI);
 				this.right.y=225+100*cos(t/100+25*Math.PI);},
 			guyChange: function(t,x,y){
-				return([x+100*sin(t/100+25*Math.PI),y+100*cos(t/100+25*Math.PI)]);
+				return([x-this.left.x+275+100*sin(t/100+25*Math.PI),y-this.left.y+225+100*cos(t/100+25*Math.PI)]);
 			}
 		}	],
 	wall:[{top:161,bottom:292,x:150},

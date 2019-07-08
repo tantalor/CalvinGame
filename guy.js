@@ -64,7 +64,6 @@ function checkWall(level, guy, gravity,direction){
 function makeMove(level, guy, upWait, flipWait, gravity){
 	var safe=false;
 	var frozen=false;
-	console.log("x"+guy.x+"y"+guy.y);
 
 	for(f of levels[level].floor){
 		var tan=gravity*(f.right.y-f.left.y)/(f.right.x-f.left.x);
@@ -145,7 +144,7 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 			else if(pressed==L){guy.x+=1;}
 		}
 		guy.fallingFrames +=1;
-		if(guy.fallingFrames==4){
+		if(guy.fallingFrames==7){
 			if(pressed==R){guy.x+=3;}
 			else if(pressed==L){guy.x-=1;}
 			guy.theta=0;
