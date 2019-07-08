@@ -64,12 +64,15 @@ function checkWall(level, guy, gravity,direction){
 function makeMove(level, guy, upWait, flipWait, gravity){
 	var safe=false;
 	var frozen=false;
+	console.log("x"+guy.x+"y"+guy.y);
 
 	for(f of levels[level].floor){
 		var tan=gravity*(f.right.y-f.left.y)/(f.right.x-f.left.x);
 		var checky = guy.y-225*(1-gravity)-gravity*f.left.y-abs(guy.x-5-f.left.x)*tan;
 		if(guy.x-5<f.right.x && guy.x>f.left.x-8
-			&&checky<3){
+			&&checky<3
+			&&!(guy.x<f.left.x-5 && guy.fallingFrames>3)
+			&&!(guy.x-2>f.right.x && guy.fallingFrames>3)){
 			if(checky>1
 			 && !(tan<0 && pressed==L && guy.x-5-f.left.x<10)
 			 && !(tan>0 && pressed==R && f.right.x-guy.x-5<10)){
@@ -104,7 +107,9 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 				guy.fallingFrames=0;
 				guy.theta=gravity*Math.atan(gravity*tan);
 			}
-			else if(checky>-.1){
+			else if(checky>-.1
+				&&!(guy.x<f.left.x-5 && guy.fallingFrames>3)
+				&&!(guy.x-2>f.right.x && guy.fallingFrames>3)){
 				safe=true;
 				frozen=checkFrozen(guy,f,level,gravity);
 				guy.theta=gravity*Math.atan((f.right.y-f.left.y)/(f.right.x-f.left.x));
