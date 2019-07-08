@@ -27,7 +27,10 @@ document.getElementById("tutorialButton").onclick=function() {
 	setup(0);
 }
 
+//setup() is called to start a new level every time a new level is needed.
+
 function setup(level){
+	
 	pressed=N;
 	var startClock=false;
 	var gravity=1;
@@ -61,6 +64,9 @@ function setup(level){
 	var guyCanvas=document.getElementById("guyCanvas");
 	var guyctx=guyCanvas.getContext("2d");
 	
+	//positions and information about the guy are stored in variable guy, accessible throughout the 
+	//level play
+	
 	var guy={x:levels[level].startx, 
 		y: levels[level].starty,
 		theta:0,
@@ -75,22 +81,36 @@ function setup(level){
 	
 	document.getElementById("timer").innerHTML=time;
 	
+	//the a-Interval is the primary animation tool. It is set to run every 10 milliseconds
+	
 	var a=setInterval(function(){
+		
+		//display clock to player
 		if(startClock){
 			time+=0.01;
 			time=Math.round(time*100)/100
 			document.getElementById("timer").innerHTML=time;
 		}
 		
+		//if not paused for flipping, we make a move
+		
 		if(!pause){
 			guy.time +=1;
 			if(pressed!=N){startClock=true;}
+			
+			//move function is in the guy.js file, and controls the motion of the guy
 			[___, upWait, flipWait,gravity]=move(level,guy,upWait,flipWait,gravity);
+		
+			//gravity is set to 0 only if you have fallen off the world
 			if(gravity==0){
 				alert("Oh no! You should probably try that again.");
 				clearInterval(a);
 				setup(level);
 			}
+			
+			//checkFlag determines if the guy is touching the flag. If true, we set the score to be 50 (max),
+			//10 (min), and inbetween, we take the score detailed in the level data as the baseline
+			
 			solved=checkFlag(guy,level,gravity);
 			if(solved){
 				var congrats="Good job! "
@@ -106,6 +126,9 @@ function setup(level){
 				}
 				
 				clearInterval(a);
+				
+				//if we are at the last level, trigger a game-win message. If we are ending the tutorial, 
+				//trigger an appropriate message to start the "real" game. Otherwise, continue on.
 				if(level==levels.length-1){
 					score=score+scoreAcheived;
 					time=0;

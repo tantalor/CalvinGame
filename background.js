@@ -1,3 +1,7 @@
+//drawBackground renders all the features of the level other than the guy. This includes floor, bridges,
+//portals, flips, flag, etc. This is called to set up the level, to update the moving floor, 
+//and anytime a flip is triggered
+
 function drawBackground(level,gravity){
 	var backgroundCanvas=document.getElementById("floorCanvas");
 	var bgctx = backgroundCanvas.getContext("2d");
@@ -5,7 +9,7 @@ function drawBackground(level,gravity){
 	backgroundCanvas.style.letterSpacing = "-1px"
 	bgctx.clearRect(0,0,backgroundCanvas.width,backgroundCanvas.height);
 	drawPortals(bgctx,level,gravity);
-	drawStaticFloor(bgctx,level,gravity);
+	drawFloor(bgctx,level,gravity);
 
 	bgctx.translate(levels[level].flag.x,225*(1-gravity)+gravity*levels[level].flag.y)
 	bgctx.rotate(Math.PI/2*(1-gravity)+gravity*levels[level].flag.theta);
@@ -17,7 +21,11 @@ function drawBackground(level,gravity){
 }
 
 
-function drawStaticFloor(ctx,level,gravity){
+//drawStaticFloor draws the walls and any floors that are nonmoving. For each feature, it translates
+//and rotates properly, then builds a rectangle for each floor segment (or an arc of a circle for)
+//bridges 
+
+function drawFloor(ctx,level,gravity){
 	for(w of levels[level].wall){
 		var width = w.bottom-w.top;
 		ctx.translate(w.x,225*(1-gravity)+gravity*w.top)
@@ -39,7 +47,7 @@ function drawStaticFloor(ctx,level,gravity){
 		}else if(f.type=="bridge"){
 			ctx.beginPath();
 			ctx.strokeStyle="#a0522d";
-			var a=4;
+			var a=4; //sometime play with this parameter
 			var Rad = pow(width,2)/8/a-a/2;
 			var angle = Math.atan(width/(2*(Rad-a)));
 			ctx.arc(width/2,-(Rad-a),Rad,Math.PI/2-angle,Math.PI/2+angle);
@@ -50,6 +58,9 @@ function drawStaticFloor(ctx,level,gravity){
 			ctx.lineWidth=0.5;
 			ctx.strokeStyle="blue";
 			var Rad=2;
+			
+			//wavy floors are constructed as half-circles pasted together
+			
 			for(var i=0;i<width/8;i++){
 				ctx.beginPath();
 				ctx.arc(Rad+8*i,0,Rad,Math.PI,2*Math.PI);		
@@ -67,16 +78,8 @@ function drawStaticFloor(ctx,level,gravity){
 }
 
 
-function drawMovingFloor(level, gravity){
-	var movingCanvas = document.getElementById("floorCanvas");
-	var movectx = movingCanvas.getContext("2d");
-	
-	movectx.clearRect(0,0,movingCanvas.width,movingCanvas.height);
-	
-	for(f of levels[level].floor){
-	}
-}
 
+//drawPortals goes through the portals array and draws both the a-side and b-side
 
 function drawPortals(ctx,level,gravity){
 	for(p of levels[level].portals){
