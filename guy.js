@@ -308,7 +308,8 @@ function spriteSheet(){
 		else{currentFrame=4;
 			counter=0;
 			
-			//default position is 4}
+			//default position is 4
+			}
 	};
 	
 	this.draw=function(guy){
