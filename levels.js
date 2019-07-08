@@ -841,7 +841,7 @@ var levels = [
 				this.right.x=325+100*sin(t/100);
 				this.right.y=225+100*cos(t/100);},
 			guyChange: function(t,x,y){
-				return([275+100*sin(t/100),225+100*cos(t/100)]);
+				return([x+100*sin(t/100),y+100*cos(t/100)]);
 			}
 		},
 		{left:{x:0,y:0},right:{x:0,y:0},type:"move",
@@ -851,7 +851,7 @@ var levels = [
 				this.right.x=325+100*sin(t/100+25*Math.PI);
 				this.right.y=225+100*cos(t/100+25*Math.PI);},
 			guyChange: function(t,x,y){
-				return([275+100*sin(t/100+25*Math.PI),225+100*cos(t/100+25*Math.PI)]);
+				return([x+100*sin(t/100+25*Math.PI),y+100*cos(t/100+25*Math.PI)]);
 			}
 		}	],
 	wall:[{top:161,bottom:292,x:150},
@@ -976,7 +976,7 @@ var levels = [
 				}		
 			},
 			guyChange:function(t,x,y){
-				return([this.left.x-2,200]);
+				return([x-2,y]);
 			}},
 			
 			{left:{x:0,y:125},right:{x:0,y:125},type:"move",
@@ -993,7 +993,7 @@ var levels = [
 				}		
 			},
 			guyChange:function(t,x,y){
-				return([this.left.x+1,125]);
+				return([x+1,y]);
 			}},
 			
 			{left:{x:0,y:125},right:{x:0,y:125},type:"move",
@@ -1010,7 +1010,7 @@ var levels = [
 				}		
 			},
 			guyChange:function(t,x,y){
-				return([this.left.x+1,125]);
+				return([x+1,y]);
 			}},
 			
 			{left:{x:0,y:125},right:{x:0,y:125},type:"move",
@@ -1027,7 +1027,7 @@ var levels = [
 				}		
 			},
 			guyChange:function(t,x,y){
-				return([this.left.x+1,125]);
+				return([x+1,y]);
 			}},
 			
 			{left:{x:0,y:275},right:{x:0,y:275},type:"move",
@@ -1044,7 +1044,7 @@ var levels = [
 				}		
 			},
 			guyChange:function(t,x,y){
-				return([this.left.x+1,275]);
+				return([x+1,y]);
 			}},
 			
 			{left:{x:0,y:275},right:{x:0,y:275},type:"move",
@@ -1061,7 +1061,7 @@ var levels = [
 				}		
 			},
 			guyChange:function(t,x,y){
-				return([this.left.x+1,275]);
+				return([x+1,y]);
 			}},
 			
 			{left:{x:0,y:275},right:{x:0,y:275},type:"move",
@@ -1078,7 +1078,7 @@ var levels = [
 				}		
 			},
 			guyChange:function(t,x,y){
-				return([this.left.x+1,275]);
+				return([x+1,y]);
 			}},		
 			
 			{left:{x:0,y:275},right:{x:0,y:275},type:"move",
@@ -1095,7 +1095,7 @@ var levels = [
 				}		
 			},
 			guyChange:function(t,x,y){
-				return([this.left.x+1,275]);
+				return([x+1,y]);
 			}},			
 				
 			{left:{x:260,y:400},right:{x:300,y:400},type:"floor"},
@@ -1116,7 +1116,7 @@ var levels = [
 					}		
 				},
 				guyChange:function(t,x,y){
-					return([this.left.x+1.5,225]);
+					return([x+1.5,y]);
 				}},
 			
 				{left:{x:0,y:225},right:{x:0,y:225},type:"move",
@@ -1133,7 +1133,7 @@ var levels = [
 						}		
 					},
 					guyChange:function(t,x,y){
-						return([this.left.x+1.5,225]);
+						return([x+1.5,y]);
 					}},
 			
 						{left:{x:0,y:350},right:{x:0,y:350},type:"move",
@@ -1150,7 +1150,7 @@ var levels = [
 							}		
 						},
 						guyChange:function(t,x,y){
-							return([this.left.x-2/3,350]);
+							return([x-2/3,y]);
 						}},
 
 						{left:{x:0,y:350},right:{x:0,y:350},type:"move",
@@ -1167,7 +1167,7 @@ var levels = [
 							}		
 						},
 						guyChange:function(t,x,y){
-							return([this.left.x-2/3,350]);
+							return([x-2/3,y]);
 						}},
 
 						{left:{x:0,y:350},right:{x:0,y:350},type:"move",
@@ -1184,7 +1184,7 @@ var levels = [
 							}		
 						},
 						guyChange:function(t,x,y){
-							return([this.left.x-2/3,350]);
+							return([x-2/3,y]);
 						}},		
 
 						{left:{x:0,y:350},right:{x:0,y:350},type:"move",
@@ -1201,7 +1201,7 @@ var levels = [
 							}		
 						},
 						guyChange:function(t,x,y){
-							return([this.left.x-2/3,350]);
+							return([x-2/3,y]);
 						}},
 						{left:{x:105,y:430},right:{x:495,y:430},type:"floor"},
 						
@@ -1219,7 +1219,7 @@ var levels = [
 							}		
 						},
 						guyChange:function(t,x,y){
-							return([this.left.x+1/2,100]);
+							return([x+1/2,y]);
 						}},
 
 						{left:{x:0,y:100},right:{x:0,y:100},type:"move",
@@ -1236,7 +1236,7 @@ var levels = [
 							}		
 						},
 						guyChange:function(t,x,y){
-							return([this.left.x+1/2,100]);
+							return([x+1/2,y]);
 						}},
 
 						{left:{x:0,y:100},right:{x:0,y:100},type:"move",
@@ -1253,7 +1253,7 @@ var levels = [
 							}		
 						},
 						guyChange:function(t,x,y){
-							return([this.left.x+1/2,100]);
+							return([x+1/2,y]);
 						}},
 			
 			],

@@ -90,8 +90,8 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 					else{direction=R;}
 					var wall=checkWall(level,guy, gravity,direction);
 					if(!wall){
-						guy.x=guy.x-f.left.x+xupdate;
-						guy.y=guy.y-f.left.y+yupdate;
+						guy.x=xupdate;
+						guy.y=yupdate;
 					}
 				}
 				
@@ -107,7 +107,7 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 				guy.fallingFrames=0;
 				guy.theta=gravity*Math.atan(gravity*tan);
 			}
-			else if(checky>-.1
+			else if(checky>0
 				&&!(guy.x<f.left.x-5 && guy.fallingFrames>3)
 				&&!(guy.x-2>f.right.x && guy.fallingFrames>3)){
 				safe=true;
@@ -121,8 +121,8 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 					else{direction=R;}
 					var wall=checkWall(level,guy, gravity,direction);
 					if(!wall){
-						guy.x=guy.x-f.left.x+xupdate;
-						guy.y=guy.y-f.left.y+yupdate;
+						guy.x=xupdate;
+						guy.y=yupdate;
 					}
 				}
 				if(f.type=="flip" && !flipWait){
@@ -140,8 +140,10 @@ function makeMove(level, guy, upWait, flipWait, gravity){
 
 	if(!safe){
 		guy.y+=1;
-		if(pressed==R){guy.x-=1;}
-		else if(pressed==L){guy.x+=1;}
+		if(guy.fallingFrames>2){
+			if(pressed==R){guy.x-=1;}
+			else if(pressed==L){guy.x+=1;}
+		}
 		guy.fallingFrames +=1;
 		if(guy.fallingFrames==4){
 			if(pressed==R){guy.x+=3;}
