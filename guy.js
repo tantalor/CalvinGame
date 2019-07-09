@@ -272,14 +272,14 @@ function checkPortal(level, guy, upWait, flipWait, gravity){
 			if((guy.x+3-p.a.x)*(guy.x-p.a.x-12)<0
 			&& (guy.y+2*gravity-(225*(1-gravity)+gravity*p.a.y))*(guy.y+2*gravity-(20+225*(1-gravity)+gravity*p.a.y))<0){
 				guy.x=p.b.x+1+20*gravity*sin(p.b.theta);
-				guy.y=225*(1-gravity)+gravity*p.b.y+(-3*p.b.loc+5*(p.b.loc*gravity-1-(p.b.loc-1)*(gravity-1)))*gravity+3/2*(p.b.loc-1)(gravity+1);
+				guy.y=225*(1-gravity)+gravity*p.b.y+(-3*p.b.loc+5*(p.b.loc*gravity-1-(p.b.loc-1)*(gravity-1)))*gravity;
 				guy.theta=gravity*p.b.theta;
 				upWait=true;
 				return makeMove(level, guy, upWait, flipWait, gravity)
 			}else	if((guy.x+3-p.b.x)*(guy.x-p.b.x-12)<0
 				&& (guy.y+2*gravity-(225*(1-gravity)+gravity*p.b.y))*(guy.y+2*gravity-(20+225*(1-gravity)+gravity*p.b.y))<0){
 					guy.x=p.a.x+1+20*gravity*sin(p.a.theta);
-					guy.y=225*(1-gravity)+gravity*p.a.y+(-3*p.a.loc+5*(p.a.loc*gravity-1-(p.a.loc-1)*(gravity-1)))*gravity+3/2*(p.a.loc-1)(gravity+1);
+					guy.y=225*(1-gravity)+gravity*p.a.y+(-3*p.a.loc+5*(p.a.loc*gravity-1-(p.a.loc-1)*(gravity-1)))*gravity;
 					guy.theta=gravity*p.a.theta;
 					upWait=true;
 					return makeMove(level, guy, upWait, flipWait, gravity)
