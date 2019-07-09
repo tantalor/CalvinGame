@@ -140,6 +140,8 @@ function makeMove(level, guy, upWait, flipWait, gravity,wall){
 				else if(checky>0){
 					//going flat or downhill
 					
+					checkFrozen(guy,f,level,gravity);
+					
 					safe=true;
 					guy.theta=gravity*Math.atan((f.right.y-f.left.y)/(f.right.x-f.left.x));
 					guy.fallingFrames=0;
