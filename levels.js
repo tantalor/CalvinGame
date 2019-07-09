@@ -803,7 +803,7 @@ var levels = [
 		flag:{x: 380, y: 5, theta: 3.141592653589793},
 		portals:[
 		  {color: "#000000", a:{x: 70, y: 365.0, theta: 0, loc: 1}, b: {x: 25, y: 325.0, theta: 0, loc: -1}},
-		  {color: "#ffffff", a:{x: 187.5, y: 335.0, theta: 0, loc: -1}, b: {x: 190.5, y: 185.0, theta: 0, loc: 1}},
+		  {color: "#ffffff", a:{x: 187.5, y: 335.0, theta: 0, loc: -1}, b: {x: 187.5, y: 195.0, theta: 0, loc: 1}},
 		  {color: "#f58231", a:{x: 20, y: 200.0, theta: 0, loc: 1}, b: {x: 367.5, y: 190.0, theta: 0, loc: -1}},
 		  {color: "#f032e6", a:{x: 20, y: 25.0, theta: 0, loc: 1}, b: {x: 367.5, y: 365.0, theta: 0, loc: 1}},
 		  {color: "#4363d8", a:{x: 187.5, y: 215.0, theta: 0, loc: -1}, b: {x: 187.5, y: 175.0, theta: 0, loc: 1}},
@@ -864,7 +864,7 @@ var levels = [
 	
 
   { levelText: "IT'S A TRAP(EZOID)!",
-    score: 30,
+    score: 45,
     floor: [{left:{x: 10, y: 360}, right: {x: 100, y: 360}, type: "floor"},
       {left:{x: 10, y: 360}, right: {x: 170, y: 120}, type: "floor"},
       {left:{x: 58, y: 332}, right: {x: 97, y: 270}, type: "floor"},
