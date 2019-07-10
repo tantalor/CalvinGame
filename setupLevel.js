@@ -32,6 +32,7 @@ document.getElementById("tutorialButton").onclick=function() {
 function setup(level){
 	
 	pressed=N;
+	lastPressed=N;
 	var startClock=false;
 	var gravity=1;
 	document.getElementById("score").innerHTML=score;

@@ -2,6 +2,7 @@ document.addEventListener("keydown",keyDownHandler,false);
 document.addEventListener("keyup", keyUpHandler, false);
 var N=0, R=1, L=-1, U=3;
 
+var lastPressed=N;
 var pressed=N;
 
 function keyDownHandler(e){
@@ -15,6 +16,7 @@ function keyDownHandler(e){
 }
 
 function keyUpHandler(e){
+	lastPressed=pressed;
 	pressed=N;
 }
 
@@ -76,7 +78,6 @@ function checkWall(level, guy, gravity,direction){
 
 
 function makeMove(level, guy, upWait, flipWait, gravity,wall){
-	console.log("x"+guy.x+"y"+guy.y);
 	var safe=false;
 	var frozen=false;
 	
@@ -100,11 +101,12 @@ function makeMove(level, guy, upWait, flipWait, gravity,wall){
 			var fallingEdge = (guy.x<f.left.x-6 && guy.fallingFrames>3) || (guy.x-3>f.right.x && guy.fallingFrames>3)
 
 			if(checkx	&& checky<3 && !fallingEdge){
-
 				if(checky>1 //going uphill
+					
+						//correct for rounding error when we are very close to the edge of the floor.
 				 && !(tan<0 && pressed==L && guy.x-5-f.left.x<10)
 				 && !(tan>0 && pressed==R && f.right.x-guy.x-5<10)){
-						//The second two lines are to correct for rounding error when we are very close to the edge of the floor.
+
 					safe=true;
 
 					if(!wall){
@@ -135,6 +137,7 @@ function makeMove(level, guy, upWait, flipWait, gravity,wall){
 
 				//going flat or downhill
 				else if(checky>0){
+
 					safe=true;
 					
 					if(!wall){
@@ -225,7 +228,7 @@ function checkFrozen(guy,f,level,gravity){
 
 function drawGuy(guy, level, gravity){
 	
-	//every frame, update the moving floor, draw the background, and draw that guy
+	//every frame, update the moving floor, draw the background, and draw the guy
 	for(f of levels[level].floor){
 		if(f.type=="move"){
 			f.update(guy.time);
@@ -264,7 +267,7 @@ function flipTime(guy,level, gravity, f){
 }
 
 function checkFlag(guy,level,gravity){
-	//check if we found the flag! actually checks the distance between the flag and the guy is small enough
+	//check if we found the flag! actually checks the distance between the flag and the guy
 	if(pow(guy.x-4-levels[level].flag.x,2)+pow(guy.y-(225*(1-gravity)+gravity*levels[level].flag.y),2)<100
 		&& (abs(guy.theta-(Math.PI/2*(1-gravity)+gravity*levels[level].flag.theta))<2 )){
 		
@@ -275,15 +278,16 @@ function checkFlag(guy,level,gravity){
 function checkPortal(level, guy, upWait, flipWait, gravity){
 	for(p of levels[level].portals){
 		
+		//check if we are at the x-y point for p.a, and move if so
 			if(checkForPortal(guy, p.a.x, p.a.y, gravity)){
-				//check if we are at the x-y point for p.a, and move if so
 				return portalMove(level, guy, p.b,gravity)
-				
+			
+				//check if we are at the x-y point for p.b, and move if so	
 			}else	if(checkForPortal(guy,p.b.x,p.b.y,gravity)){
-				//check if we are at the x-y point for p.b, and move if so
 					return portalMove(level, guy, p.a, gravity)
 				}
 	}
+	
 	//otherwise just make a normal move
 	return makeMove(level, guy, upWait, flipWait, gravity,false);
 	
@@ -328,10 +332,11 @@ function spriteSheet(){
 		guy.ctx.translate(guy.x,guy.y);
 		guy.ctx.rotate(guy.theta);
 		if(pressed==L){guy.ctx.scale(-1,1);}
+		if(abs(pressed)!=1 && lastPressed==L){guy.ctx.scale(-1,1);}
 		guy.ctx.drawImage(image, 
 			currentFrame*frameWidth,0,
 			frameWidth,frameHeight,
-			-5,-22,
+			-5,-23,
 			15,22);
 		guy.ctx.setTransform(1,0,0,1,0,0);
 	};
