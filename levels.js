@@ -711,7 +711,7 @@ var levels = [
 		  {left:{x: 330.0, y: 245.0}, right: {x: 350.0, y: 245.0}, type: "floor"},
 		  {left:{x: 290.0, y: 205.0}, right: {x: 320.0, y: 205.0}, type: "floor"},
 		  {left:{x: 350.0, y: 185.0}, right: {x: 365.0, y: 170.0}, type: "floor"},
-		  {left:{x: 364.0, y: 170.0}, right: {x: 381.0, y: 170.0}, type: "floor"},
+		  {left:{x: 365.0, y: 170.0}, right: {x: 380.0, y: 170.0}, type: "floor"},
 		  {left:{x: 35.0, y: 170.0}, right: {x: 50.0, y: 185.0}, type: "floor"},
 		  {left:{x: 40.0, y: 125.0}, right: {x: 50.0, y: 125.0}, type: "floor"},
 		  {left:{x: 50.0, y: 125.0}, right: {x: 80.0, y: 155.0}, type: "floor"},
@@ -965,7 +965,7 @@ var levels = [
 			{left:{x:0,y:200},right:{x:0,y:200},type:"move",
 			update: function(t){
 				if(2*t%300<100){
-					this.left.x = 301-2*t%100;
+					this.left.x = 302-2*t%100;
 					this.right.x = 299
 				}else if(2*t%300<200){
 					this.left.x = 200-2*t%100;
@@ -1098,14 +1098,14 @@ var levels = [
 				return([x+1,y]);
 			}},			
 				
-			{left:{x:260,y:400},right:{x:300,y:400},type:"floor"},
+			{left:{x:260,y:400},right:{x:302,y:400},type:"floor"},
 			{left:{x:460,y:50},right:{x:500,y:50},type:"floor"},
 			{left:{x:375,y:400},right:{x:425,y:400},type:"floor"},
 			
 			{left:{x:0,y:225},right:{x:0,y:225},type:"move",
 				update: function(t){
 					if(1.5*t%275<75){
-						this.left.x = 301;
+						this.left.x = 302;
 						this.right.x = 299+1.5*t%275;
 					}else if(1.5*t%275<200){
 						this.left.x = 225+1.5*t%275;
@@ -1122,7 +1122,7 @@ var levels = [
 				{left:{x:0,y:225},right:{x:0,y:225},type:"move",
 					update: function(t){
 						if(1.5*(t+90)%275<75){
-							this.left.x = 301;
+							this.left.x = 302;
 							this.right.x = 299+1.5*(t+90)%275;
 						}else if(1.5*(t+90)%275<200){
 							this.left.x = 225+1.5*(t+90)%275;
@@ -1145,7 +1145,7 @@ var levels = [
 								this.left.x = 500-(2*t/3)%230;
 								this.right.x = 530-(2*t/3)%230;
 							}else{
-								this.left.x=302;
+								this.left.x = 304;
 								this.right.x = 530-(2*t/3)%230;
 							}		
 						},
@@ -1162,7 +1162,7 @@ var levels = [
 								this.left.x = 500-(2*t/3+56)%230;
 								this.right.x = 530-(2*t/3+56)%230;
 							}else{
-								this.left.x=302;
+								this.left.x = 304;
 								this.right.x = 530-(2*t/3+56)%230;
 							}		
 						},
@@ -1179,7 +1179,7 @@ var levels = [
 								this.left.x = 500-(2*t/3+112)%230;
 								this.right.x = 530-(2*t/3+112)%230;
 							}else{
-								this.left.x=302;
+								this.left.x = 304;
 								this.right.x = 530-(2*t/3+112)%230;
 							}		
 						},
@@ -1196,7 +1196,7 @@ var levels = [
 								this.left.x = 500-(2*t/3+168)%230;
 								this.right.x = 530-(2*t/3+168)%230;
 							}else{
-								this.left.x=302;
+								this.left.x = 304;
 								this.right.x = 530-(2*t/3+168)%230;
 							}		
 						},
@@ -1208,7 +1208,7 @@ var levels = [
 						{left:{x:0,y:100},right:{x:0,y:100},type:"move",
 						update: function(t){
 							if((1/2*t)%250<50){
-								this.left.x = 301;
+								this.left.x = 302;
 								this.right.x =300+ (1/2*t)%250
 							}else if((1/2*t)%250<200){
 								this.left.x = 250+(1/2*t)%250;
@@ -1225,7 +1225,7 @@ var levels = [
 						{left:{x:0,y:100},right:{x:0,y:100},type:"move",
 						update: function(t){
 							if((1/2*t+85)%250<50){
-								this.left.x = 301;
+								this.left.x = 302;
 								this.right.x =300+ (1/2*t+85)%250
 							}else if((1/2*t+85)%250<200){
 								this.left.x = 250+(1/2*t+85)%250;
@@ -1242,7 +1242,7 @@ var levels = [
 						{left:{x:0,y:100},right:{x:0,y:100},type:"move",
 						update: function(t){
 							if((1/2*t+170)%250<50){
-								this.left.x = 301;
+								this.left.x = 302;
 								this.right.x =300+ (1/2*t+170)%250
 							}else if((1/2*t+170)%250<200){
 								this.left.x = 250+(1/2*t+170)%250;
@@ -1257,7 +1257,7 @@ var levels = [
 						}},
 			
 			],
-		wall:[{top:50,bottom:400,x:300},
+		wall:[{top:50,bottom:400,x:302},
 			{top:50,bottom:400,x:98},
 			{top:50,bottom:400,x:500}],
 		flag: {x:393,y:400,theta:0},

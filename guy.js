@@ -76,6 +76,7 @@ function checkWall(level, guy, gravity,direction){
 
 
 function makeMove(level, guy, upWait, flipWait, gravity,wall){
+	console.log("x"+guy.x+"y"+guy.y);
 	var safe=false;
 	var frozen=false;
 	
@@ -83,24 +84,24 @@ function makeMove(level, guy, upWait, flipWait, gravity,wall){
 	//frozen indicates whether another piece of floor is blocking the guy from moving forward. It will
 	//be set to true if a blockage is found.
 
+	console.log(!wall || guy.fallingFrames>3)
 	if(!wall){
 		for(f of levels[level].floor){
+			
 			//tan carries the tangent of the angle made by this floor, counterclockwise from 0.
-
 			var tan=gravity*(f.right.y-f.left.y)/(f.right.x-f.left.x);
 
-			
+			// the difference between the expected y value on the floor, given the guy's
+			//x-value, and his actual y-value.			
 			var checky = guy.y-225*(1-gravity)-gravity*f.left.y-abs(guy.x-5-f.left.x)*tan;
-				// the difference between the expected y value on the floor, given the guy's
-				//x-value, and his actual y-value.
 			
 			
 			var checkx = (guy.x-5<f.right.x) && (guy.x>f.left.x-8) //check if x is in range for this floor
 
-			var fallingEdge = (guy.x<f.left.x-5 && guy.fallingFrames>3) || (guy.x-3>f.right.x && guy.fallingFrames>3)
-				//check if we're falling too close to a ledge, don't want to land here
+			//check if we're falling too close to a ledge, don't want to land here
+			var fallingEdge = (guy.x<f.left.x-6 && guy.fallingFrames>3) || (guy.x-3>f.right.x && guy.fallingFrames>3)
 
-			if(checkx && checky<3 && !fallingEdge){
+			if(checkx	&& checky<3 && !fallingEdge){
 
 				if(checky>1 //going uphill
 				 && !(tan<0 && pressed==L && guy.x-5-f.left.x<10)
@@ -112,7 +113,6 @@ function makeMove(level, guy, upWait, flipWait, gravity,wall){
 					guy.fallingFrames=0;
 					guy.theta=gravity*Math.atan(gravity*tan);
 					
-					
 					//check if we run into some other floor
 					frozen=checkFrozen(guy,f,level,gravity);
 					if(!frozen){
@@ -122,14 +122,11 @@ function makeMove(level, guy, upWait, flipWait, gravity,wall){
 
 					//if we are on a moving floor, we increment the guy as detailed in the data for the level
 					//so that he moves with the floor
-
 					if(f.type=="move"){
 						moveIncrement(guy,level,gravity,f);
 					}
 
-					//If we hit a flipper, we pause play and draw the  flip as detailed in drawFlip function, 
-					//found in background.js
-
+					//If we hit a flipper, draw the flip as detailed in flipTime function
 					if(f.type=="flip" && !flipWait){						
 						[gravity, flipWait]=flipTime(guy,level,gravity,f);
 					}
@@ -137,8 +134,8 @@ function makeMove(level, guy, upWait, flipWait, gravity,wall){
 					
 				}
 
+				//going flat or downhill
 				else if(checky>0){
-					//going flat or downhill
 					
 					checkFrozen(guy,f,level,gravity);
 					
