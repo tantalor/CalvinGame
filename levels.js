@@ -730,7 +730,6 @@ var levels = [
 		  {left:{x: 200.0, y: 5.0}, right: {x: 395.0, y: 5.0}, type: "floor"},
 		  {left:{x: 201.0, y: 125.0}, right: {x: 215.0, y: 125.0}, type: "floor"},
 		  {left:{x: 215.0, y: 125.0}, right: {x: 230.0, y: 110.0}, type: "floor"},
-		  {left:{x: 215.0, y: 80.0}, right: {x: 230.0, y: 80.0}, type: "floor"},
 		  {left:{x: 230.0, y: 155.0}, right: {x: 260.0, y: 155.0}, type: "floor"},
 		  {left:{x: 245.0, y: 110.0}, right: {x: 305.0, y: 110.0}, type: "floor"},
 		  {left:{x: 260.0, y: 155.0}, right: {x: 275.0, y: 140.0}, type: "floor"},
