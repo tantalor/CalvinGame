@@ -84,7 +84,6 @@ function makeMove(level, guy, upWait, flipWait, gravity,wall){
 	//safe indicates if the guy is on a floor; it will switch to true if a floor is found.
 	//frozen indicates whether another piece of floor is blocking the guy from moving forward. It will
 	//be set to true if a blockage is found.
-
 		for(f of levels[level].floor){
 			
 			//tan carries the tangent of the angle made by this floor, counterclockwise from 0.
@@ -102,7 +101,6 @@ function makeMove(level, guy, upWait, flipWait, gravity,wall){
 
 			if(checkx	&& checky<3 && !fallingEdge){
 				if(checky>1 //going uphill
-					
 						//correct for rounding error when we are very close to the edge of the floor.
 				 && !(tan<0 && pressed==L && guy.x-5-f.left.x<10)
 				 && !(tan>0 && pressed==R && f.right.x-guy.x-5<10)){
@@ -137,7 +135,6 @@ function makeMove(level, guy, upWait, flipWait, gravity,wall){
 
 				//going flat or downhill
 				else if(checky>0){
-
 					safe=true;
 					
 					if(!wall){
@@ -332,7 +329,9 @@ function spriteSheet(){
 		guy.ctx.translate(guy.x,guy.y);
 		guy.ctx.rotate(guy.theta);
 		if(pressed==L){guy.ctx.scale(-1,1);}
-		if(abs(pressed)!=1 && lastPressed==L){guy.ctx.scale(-1,1);}
+		if(abs(pressed)!=1 && lastPressed==L){
+			guy.ctx.scale(-1,1);
+			guy.ctx.translate(-5,0);}
 		guy.ctx.drawImage(image, 
 			currentFrame*frameWidth,0,
 			frameWidth,frameHeight,
