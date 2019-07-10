@@ -711,7 +711,7 @@ var levels = [
 		  {left:{x: 330.0, y: 245.0}, right: {x: 350.0, y: 245.0}, type: "floor"},
 		  {left:{x: 290.0, y: 205.0}, right: {x: 320.0, y: 205.0}, type: "floor"},
 		  {left:{x: 350.0, y: 185.0}, right: {x: 365.0, y: 170.0}, type: "floor"},
-		  {left:{x: 365.0, y: 170.0}, right: {x: 380.0, y: 170.0}, type: "floor"},
+		  {left:{x: 364.0, y: 170.0}, right: {x: 381.0, y: 170.0}, type: "floor"},
 		  {left:{x: 35.0, y: 170.0}, right: {x: 50.0, y: 185.0}, type: "floor"},
 		  {left:{x: 40.0, y: 125.0}, right: {x: 50.0, y: 125.0}, type: "floor"},
 		  {left:{x: 50.0, y: 125.0}, right: {x: 80.0, y: 155.0}, type: "floor"},
