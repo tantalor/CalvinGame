@@ -66,7 +66,7 @@ function checkWall(level, guy, gravity,direction){
 					||(gravity==-1 && guy.y-2>450-w.bottom+1 && guy.y<450-w.top+2)){
 					if(guy.x-w.x<4 && 0<guy.x-w.x && direction==L){
 						return true;
-					}else if(w.x-guy.x<10 && 0<w.x-guy.x && direction==R){
+					}else if(w.x-guy.x<6 && 0<w.x-guy.x && direction==R){
 						return true;
 					}
 				}
@@ -84,8 +84,6 @@ function makeMove(level, guy, upWait, flipWait, gravity,wall){
 	//frozen indicates whether another piece of floor is blocking the guy from moving forward. It will
 	//be set to true if a blockage is found.
 
-	console.log(!wall || guy.fallingFrames>3)
-	if(!wall){
 		for(f of levels[level].floor){
 			
 			//tan carries the tangent of the angle made by this floor, counterclockwise from 0.
@@ -107,55 +105,59 @@ function makeMove(level, guy, upWait, flipWait, gravity,wall){
 				 && !(tan<0 && pressed==L && guy.x-5-f.left.x<10)
 				 && !(tan>0 && pressed==R && f.right.x-guy.x-5<10)){
 						//The second two lines are to correct for rounding error when we are very close to the edge of the floor.
-
-					guy.y-=1;
 					safe=true;
-					guy.fallingFrames=0;
-					guy.theta=gravity*Math.atan(gravity*tan);
-					
-					//check if we run into some other floor
-					frozen=checkFrozen(guy,f,level,gravity);
-					if(!frozen){
-						if(pressed==R){guy.x-=1;}
-						else if(pressed==L){guy.x+=1;}
-					}
 
-					//if we are on a moving floor, we increment the guy as detailed in the data for the level
-					//so that he moves with the floor
-					if(f.type=="move"){
-						moveIncrement(guy,level,gravity,f);
-					}
+					if(!wall){
+						guy.y-=1;
+						guy.fallingFrames=0;
+						guy.theta=gravity*Math.atan(gravity*tan);
 
-					//If we hit a flipper, draw the flip as detailed in flipTime function
-					if(f.type=="flip" && !flipWait){						
-						[gravity, flipWait]=flipTime(guy,level,gravity,f);
-					}
+						//check if we run into some other floor
+						frozen=checkFrozen(guy,f,level,gravity);
+						if(!frozen){
+							if(pressed==R){guy.x-=1;}
+							else if(pressed==L){guy.x+=1;}
+						}
 
+						//if we are on a moving floor, we increment the guy as detailed in the data for the level
+						//so that he moves with the floor
+						if(f.type=="move"){
+							moveIncrement(guy,level,gravity,f);
+						}
+
+						//If we hit a flipper, draw the flip as detailed in flipTime function
+						if(f.type=="flip" && !flipWait){						
+							[gravity, flipWait]=flipTime(guy,level,gravity,f);
+						}
+					}
 					
 				}
 
 				//going flat or downhill
 				else if(checky>0){
-					
-					checkFrozen(guy,f,level,gravity);
-					
 					safe=true;
-					guy.theta=gravity*Math.atan((f.right.y-f.left.y)/(f.right.x-f.left.x));
-					guy.fallingFrames=0;
 					
-					if(f.type=="move"){
-						moveIncrement(guy,level,gravity,f);
-					}
-					
-					if(f.type=="flip" && !flipWait){						
-						[gravity, flipWait]=flipTime(guy,level,gravity,f);
+					if(!wall){
+							checkFrozen(guy,f,level,gravity);
+
+							guy.theta=gravity*Math.atan((f.right.y-f.left.y)/(f.right.x-f.left.x));
+							guy.fallingFrames=0;
+
+							if(f.type=="move"){
+								moveIncrement(guy,level,gravity,f);
+							}
+
+							if(f.type=="flip" && !flipWait){						
+								[gravity, flipWait]=flipTime(guy,level,gravity,f);
+							}
+						
 					}
 					
 				}
 			}
 		}
 		
-	}
+	
 
 
 	
