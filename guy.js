@@ -97,7 +97,7 @@ function makeMove(level, guy, upWait, flipWait, gravity,wall){
 			
 			var checkx = (guy.x-5<f.right.x) && (guy.x>f.left.x-8) //check if x is in range for this floor
 
-			var fallingEdge = (guy.x<f.left.x-5 && guy.fallingFrames>3) || (guy.x-2>f.right.x && guy.fallingFrames>3)
+			var fallingEdge = (guy.x<f.left.x-5 && guy.fallingFrames>3) || (guy.x-4>f.right.x && guy.fallingFrames>3)
 				//check if we're falling too close to a ledge, don't want to land here
 
 			if(checkx	&& checky<3 && !fallingEdge){
