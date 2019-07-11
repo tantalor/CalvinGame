@@ -9,12 +9,20 @@
 
 <center>
 <div class="intro">Welcome! Ready to play?<br><br></div>
-<button type="button" class="intro" id="tutorialButton">Try the Tutorial!</button>
-<br>
-<br>
-<button type="button" class="intro" id="levelsButton">Straight to the Game!</button> 
 
-<div id="levelMessage" style="position:absolute,left:350"> </div>
+<div name = "playing" id="levelMessage" style="position:absolute,left:350; top:50"> </div>
+
+<button type="button" class="intro" id="tutorialButton">Tutorial</button> <div class="intro" >Score: </div><div class="intro"  id="tutorialScore"></div>
+<br>
+<br>
+<button type="button" class="intro" id="worldOneButton">World One: Easy Breezy</button> <div class="intro" >Score: </div><div class="intro"  id="worldOneScore"></div>
+<br>
+<br>
+<button type="button" class="intro" id="worldTwoButton">World Two: Puzzle Time</button> <div class="intro" >Score: </div><div class="intro" id="worldTwoScore"></div>
+<br>
+<br>
+<button type="button" class="intro" id="worldThreeButton">World Three: I feel the Earth move under my feet</button> <div class="intro" >Score: </div><div class="intro"  id="worldThreeScore"></div>
+
 
 <div name="playing" style="display:none; position:absolute; left:60; top:300">
 	<span id="timeText">Level Time:</span>
@@ -30,14 +38,17 @@
 </div>
 
 <div>
-<canvas id="floorCanvas" width="600" height="450" style="position: absolute; left: 200; top: 130; z-index: 0;"></canvas>
+<canvas name="playing" id="floorCanvas" width="600" height="450" style="position: absolute; left: 200; top: 130; z-index: -1;"></canvas>
 
-<canvas id="guyCanvas" width="600" height="450" style="position: absolute; left: 200; top: 130; z-index: 0;"></canvas>
+<canvas name="playing" id="guyCanvas" width="600" height="450" style="position: absolute; left: 200; top: 130; z-index: -1;"></canvas>
 
 </center>
 
-<script src="levels.js"></script>
 <script src="background.js"></script>
+<script src="tutorial.js"></script>
+<script src="WorldOne.js"></script>
+<script src="WorldTwo.js"></script>
+<script src="WorldThree.js"></script>
 <script src="guy.js"></script>
 <script src="setupLevel.js"></script>
 
