@@ -259,7 +259,8 @@ function flipTime(guy,level, gravity, f){
 	pressed=N;
 	pause=true;
 	drawFlip(level,-gravity);
-	guy.y=450-(guy.y-5)
+	guy.y=450-(guy.y-5);
+	guy.fallingFrames=8;
 	return([-gravity,true]);
 }
 
