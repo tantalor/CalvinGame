@@ -2,6 +2,7 @@ document.addEventListener("keydown",keyDownHandler,false);
 document.addEventListener("keyup", keyUpHandler, false);
 var N=0, R=1, L=-1, U=3;
 
+var lastPressed=N;
 var pressed=N;
 
 function keyDownHandler(e){
@@ -15,31 +16,33 @@ function keyDownHandler(e){
 }
 
 function keyUpHandler(e){
+	lastPressed=pressed;
 	pressed=N;
 }
 
-function move(level, guy, upWait, flipWait, gravity){
-	var wall=false;
+
+
+
+function moveFrame(level, guy, upWait, flipWait, gravity){
+	
+	//First check if the player has pressed Up button at a portal. The variable upWait will be set to
+	//true if they have just come from a portal, so they don't boing back and forth between two portals 
+	//of the same color. So if player has pressed UP and are not just coming from a portal, we run 
+	//checkPortal. Otherwise, run makeMove.
+		
 	if(pressed==U){
 		flipWait=false;
 		if(!upWait){
-			return checkPortal(level,guy,upWait, flipWait, gravity);
+			return checkUpPress(level,guy,upWait, flipWait, gravity);
 		}else{
-			return makeMove(level, guy, true, flipWait, gravity);
+			return makeMove(level, guy, true, flipWait, gravity,false);
 		}
 	}else{
-		for(f of levels[level].floor){
-			if(f.type=="wall"){
-				if((gravity==1 && guy.y-2>f.a.y+1 && guy.y<f.b.y+2)
-						||(gravity==-1 && guy.y-2>450-f.b.y+1 && guy.y<450-f.a.y+2)){
-						if(guy.x-f.a.x<2 && 0<guy.x-f.a.x && pressed==L){
-							wall=true;
-						}else if(f.a.x-guy.x<8 && 0<f.a.x-guy.x && pressed==R){
-							wall=true;
-						}
-					}
-			}
-		}
+		//if Up button is not pressed, we check first if we are hitting a wall that is preventing
+		//player from moving further. If not, we increment the x-value appropriately. Then run makeMove
+		
+		var wall=false;
+		wall=checkWall(level, guy, gravity,pressed);
 		
 		if(pressed==R && !wall){
 			guy.x+=1;
@@ -51,112 +54,279 @@ function move(level, guy, upWait, flipWait, gravity){
 		
 		upWait=false;
 	
-		return makeMove(level, guy, upWait, flipWait, gravity)
+		return makeMove(level, guy, upWait, flipWait, gravity,wall)
 	}
 }
 
+//checkWall checks if the guy is running into a wall. First determine if he's within y-range of any 
+//wall, and if so, check if he's at the right x-value to be blocked. If he's blocked, return true
+//to indicate blockage.
+
+function checkWall(level, guy, gravity,direction){
+	for(w of levels[level].wall){
+		if((gravity==1 && guy.y-2>w.top+1 && guy.y<w.bottom+2)
+					||(gravity==-1 && guy.y-2>450-w.bottom+1 && guy.y<450-w.top+2)){
+					if(guy.x-w.x<8 && 0<guy.x-w.x && direction==L){
+						return true;
+					}else if(w.x-guy.x<6 && 0<w.x-guy.x && direction==R){
+						return true;
+					}
+				}
+	}
+	return false;
+}
 
 
-
-function makeMove(level, guy, upWait, flipWait, gravity){
+function makeMove(level, guy, upWait, flipWait, gravity,wall){
 	var safe=false;
-	for(f of levels[level].floor){
-		var tan=gravity*(f.b.y-f.a.y)/(f.b.x-f.a.x);
-		if(f.type!="wall" && guy.x-5<f.b.x
-			&& guy.x>f.a.x-8
-			&&guy.y-225*(1-gravity)-gravity*f.a.y-abs(guy.x-5-f.a.x)*tan<3){
-			if(guy.y-225*(1-gravity)-gravity*f.a.y-abs(guy.x-5-f.a.x)*tan>1
-			 && !(tan<0 && pressed==L)
-			 && !(tan>0 && pressed==R)){
-				guy.y-=1;
-				safe=true;
-				if(pressed==R){guy.x-=1;}
-				else if(pressed==L){guy.x+=1;}
-				if(f.type=="flip" && !flipWait){
-					guy.x=(f.b.x+f.a.x)/2;
-					pressed=N;
-					gravity = -gravity;
-					drawFlip(level,gravity);
-					guy.y=450-(guy.y-5)
-					flipWait=true;
+	var frozen=false;
+	
+	//safe indicates if the guy is on a floor; it will switch to true if a floor is found.
+	//frozen indicates whether another piece of floor is blocking the guy from moving forward. It will
+	//be set to true if a blockage is found.
+		for(f of levels[level].floor){
+			
+			//tan carries the tangent of the angle made by this floor, counterclockwise from 0.
+			var tan=gravity*(f.right.y-f.left.y)/(f.right.x-f.left.x);
+
+			// the difference between the expected y value on the floor, given the guy's
+			//x-value, and his actual y-value.			
+			var checky = guy.y-225*(1-gravity)-gravity*f.left.y-abs(guy.x-5-f.left.x)*tan;
+			
+			
+			var checkx = (guy.x-5<f.right.x) && (guy.x>f.left.x-8) //check if x is in range for this floor
+
+			//check if we're falling too close to a ledge, don't want to land here
+			var fallingEdge = (guy.x<f.left.x-6 && guy.fallingFrames>3) || (guy.x-3>f.right.x && guy.fallingFrames>3)
+
+			if(checkx	&& checky<3 && !fallingEdge){
+				if(checky>1 //going uphill
+						//correct for rounding error when we are very close to the edge of the floor.
+				 && !(tan<0 && pressed==L && guy.x-5-f.left.x<10)
+				 && !(tan>0 && pressed==R && f.right.x-guy.x-5<10)){
+
+					safe=true;
+
+					if(!wall){
+						guy.y-=1;
+						guy.fallingFrames=0;
+						guy.theta=gravity*Math.atan(gravity*tan);
+
+						//check if we run into some other floor
+						frozen=checkFrozen(guy,f,level,gravity);
+						if(!frozen){
+							if(pressed==R){guy.x-=1;}
+							else if(pressed==L){guy.x+=1;}
+						}
+
+						//if we are on a moving floor, we increment the guy as detailed in the data for the level
+						//so that he moves with the floor
+						if(f.type==move){
+							moveIncrement(guy,level,gravity,f);
+						}
+
+						//If we hit a flipper, draw the flip as detailed in flipTime function
+						if(f.type==flip && !flipWait){						
+							[gravity, flipWait]=flipTime(guy,level,gravity,f);
+						}
+					}
+					
 				}
 
-				guy.fallingFrames=0;
-				guy.theta=gravity*Math.atan((f.b.y-f.a.y)/(f.b.x-f.a.x));
-			}
-			else if(guy.y-225*(1-gravity)-gravity*f.a.y-abs(guy.x-5-f.a.x)*tan>0){
-				safe=true;
-				guy.theta=gravity*Math.atan((f.b.y-f.a.y)/(f.b.x-f.a.x));
-				guy.fallingFrames=0;
-				if(f.type=="flip" && !flipWait){
-					guy.x=(f.b.x+f.a.x)/2
-					pressed=N;
-					gravity=-gravity;
-					pause=true;
-					drawFlip(level,gravity);
-					guy.y=450-(guy.y-5);
-					flipWait=true;
+				//going flat or downhill
+				else if(checky>0){
+					safe=true;
+					
+					if(!wall){
+							checkFrozen(guy,f,level,gravity);
+
+							guy.theta=gravity*Math.atan((f.right.y-f.left.y)/(f.right.x-f.left.x));
+							guy.fallingFrames=0;
+
+							if(f.type==move){
+								moveIncrement(guy,level,gravity,f);
+							}
+
+							if(f.type==flip && !flipWait){						
+								[gravity, flipWait]=flipTime(guy,level,gravity,f);
+							}
+						
+					}
+					
 				}
 			}
 		}
-	}
+		
 	
+
+
+	
+
+//if the guy is found not to be on a floor (i.e., not safe), we want him to fall. So we increase his
+//y-value and then do some falling stuff
+
 	if(!safe){
 		guy.y+=1;
-		if(pressed==R){guy.x-=1;}
-		else if(pressed==L){guy.x+=1;}
+		if(guy.fallingFrames>2){
+			//if he's been falling for more than 2 frames, we decide to believe he's falling for realsies.
+			//so we undo the incrementation of his x-value that was found in move()
+			
+				if(pressed==R){guy.x-=1;}
+				else if(pressed==L){guy.x+=1;}				
+			
+		}
 		guy.fallingFrames +=1;
-		if(guy.fallingFrames==2){
-			if(pressed==R){guy.x+=3;}
-			else if(pressed==L){guy.x-=1;}
+		if(guy.fallingFrames==7){
+			//if he's been falling for more than 7 frames, this shit is for real. Turn that guy back upright.
+			
+			//push away from floor so he isn't falling just below the ledge, unless a wall in the way
+			if(!wall){
+				if(pressed==R){guy.x+=3;}
+				else if(pressed==L){guy.x-=1;}	
+			}
 			guy.theta=0;
 		}
 	}
-	if(guy.y>500){
+	if(guy.y>450){
+		//if he's off the screen, he's fuckin dead
 		gravity=0;
 	}
+	
 	guy.ctx.clearRect(0,0,guy.canvas.width,guy.canvas.height);
-	drawGuy(guy);
+	drawGuy(guy,level,gravity);
+	
 	return([guy,upWait, flipWait, gravity]);
 }
 
 
-function drawGuy(guy){
+function checkFrozen(guy,f,level,gravity){
+	//check if there is a floor (other than the one we are on) blocking the guy from moving forward
+	for(w of levels[level].floor){
+		if(w!=f){
+			var tan=gravity*(w.right.y-w.left.y)/(w.right.x-w.left.x);
+			var checky = guy.y-225*(1-gravity)-gravity*w.left.y-abs(guy.x-5-w.left.x)*tan
+			var checkx = (guy.x<w.right.x)&&(guy.x>w.left.x)
+			
+			if(checkx //in range of that floor (xwise)
+				&& checky<20 //below the floor
+				&& checky>18.5 //but not too far away
+				&& w.type!=bridge){  //except for bridges, obvi
+					
+					//if those conditions are met, undo the increment to guy.x that was done in move()
+					if(pressed==R){guy.x-=1;}
+					else if(pressed==L){guy.x+=1;}
+					return true;
+				}
+			}
+		}
+		return false;
+}
+
+
+function drawGuy(guy, level, gravity){
+	
+	//every frame, update the moving floor, draw the background, and draw the guy
+	for(f of levels[level].floor){
+		if(f.type==move){
+			f.update(guy.time);
+		}
+	}
+	drawBackground(level, gravity);
+	
 	sprite.draw(guy);
 	sprite.update();
 }
 
+function moveIncrement(guy,level,gravity,f){
+	var [xupdate,yupdate]=f.guyChange(guy.time,guy.x,guy.y);
+	//get proposed update to position of the guy
+	
+	var direction=N;
+	if(xupdate<f.left.x){direction=L;}
+	else{direction=R;}
+	var wall=checkWall(level,guy, gravity,direction);
+	//check if a wall is blocking you
+	
+	//if it's not, update the guy
+	if(!wall){
+		guy.x=xupdate;
+		guy.y=yupdate;
+	}
+}
+
+function flipTime(guy,level, gravity, f){
+	guy.x=(f.right.x+f.left.x)/2;
+	pressed=N;
+	pause=true;
+	drawFlip(level,-gravity);
+	guy.y=450-(guy.y-5);
+	guy.fallingFrames=8;
+	return([-gravity,true]);
+}
+
 function checkFlag(guy,level,gravity){
-	if(pow(guy.x-4-levels[level].flagX,2)+pow(guy.y-(225*(1-gravity)+gravity*levels[level].flagY),2)<100
-		&& (abs(guy.theta-(Math.PI/2*(1-gravity)+gravity*levels[level].flagTheta))<2 )){
+	//check if we found the flag! actually checks the distance between the flag and the guy
+	if(pow(guy.x-4-levels[level].flag.x,2)+pow(guy.y-(225*(1-gravity)+gravity*levels[level].flag.y),2)<100
+		&& (abs(guy.theta-(Math.PI/2*(1-gravity)+gravity*levels[level].flag.theta))<2 )){
 		
 		return true;
 		}else{return false;}
 }
 
-function checkPortal(level, guy, upWait, flipWait, gravity){
+function checkUpPress(level, guy, upWait, flipWait, gravity){
+	
 	for(p of levels[level].portals){
-			if((guy.x+3-p.a.x)*(guy.x-p.a.x-12)<0
-			&& (guy.y+2*gravity-(225*(1-gravity)+gravity*p.a.y))*(guy.y+2*gravity-(20+225*(1-gravity)+gravity*p.a.y))<0){
-				guy.x=p.b.x+1+20*gravity*sin(p.b.theta);
-				guy.y=225*(1-gravity)+gravity*p.b.y-3*gravity*p.b.loc;
-				guy.theta=gravity*p.b.theta;
-				upWait=true;
-				return makeMove(level, guy, upWait, flipWait, gravity)
-			}else	if((guy.x+3-p.b.x)*(guy.x-p.b.x-12)<0
-				&& (guy.y+2*gravity-(225*(1-gravity)+gravity*p.b.y))*(guy.y+2*gravity-(20+225*(1-gravity)+gravity*p.b.y))<0){
-					guy.x=p.a.x+1+20*gravity*sin(p.a.theta);
-					guy.y=225*(1-gravity)+gravity*p.a.y-3*gravity*p.a.loc;
-					guy.theta=gravity*p.a.theta;
-					upWait=true;
-					return makeMove(level, guy, upWait, flipWait, gravity)
+		
+		//check if we are at the x-y point for p.a, and move if so
+			if(checkForPortal(guy, p.a.x, p.a.y, gravity)){
+				return portalMove(level, guy, p.b,gravity)
+			
+				//check if we are at the x-y point for p.b, and move if so	
+			}else	if(checkForPortal(guy,p.b.x,p.b.y,gravity)){
+					return portalMove(level, guy, p.a, gravity)
 				}
 	}
-	return makeMove(level, guy, upWait, flipWait, gravity);
+	
+	for(b of levels[level].buttons){
+		if(checkButton(guy,b.x,b.y,gravity)){
+			for(f of levels[level].floor){
+				if(f.type==button && f.trig==b.trigger){
+					pressed=N;
+					upWait=true;
+					pause=true;
+					drawSwitch(f,level,gravity);
+				}
+				
+			}
+		}
+	}
+	
+	//otherwise just make a normal move
+	return makeMove(level, guy, upWait, flipWait, gravity,false);
 	
 }
 
+function checkButton(guy, x, y, g){
+	var checkx = (guy.x+3-x)*(guy.x-x-12)<0;
+	var checky = (guy.y+2*g-(225*(1-g)+g*y))*(guy.y+2*g-(20+225*(1-g)+g*y))<0;
+	return( checkx && checky);
+	
+}
 
+function checkForPortal(guy, x, y, g){
+	var checkx = (guy.x+3-x)*(guy.x-x-12)<0;
+	var checky = (guy.y+2*g-(225*(1-g)+g*y))*(guy.y+2*g-(20+225*(1-g)+g*y))<0;
+	return( checkx && checky);
+}
+
+function portalMove(level, guy, portal, g){
+	guy.x = portal.x+1+20*g*sin(portal.theta);
+	guy.y=225*(1-g)+g*portal.y+(-3*portal.loc+5*(portal.loc*g-1-(portal.loc-1)*(g-1)))*g;
+	guy.theta = g*portal.theta;
+	return makeMove(level, guy, true, false, g, false);
+}
+
+//create the sprite for the guy 
 
 function spriteSheet(){
 	var image = new Image();
@@ -172,17 +342,23 @@ function spriteSheet(){
 		}
 		if(abs(pressed)==1){counter = (counter+1)%5}
 		else{currentFrame=4;
-			counter=0;}
+			counter=0;
+			
+			//default position is 4
+			}
 	};
 	
 	this.draw=function(guy){
 		guy.ctx.translate(guy.x,guy.y);
 		guy.ctx.rotate(guy.theta);
 		if(pressed==L){guy.ctx.scale(-1,1);}
+		if(abs(pressed)!=1 && lastPressed==L){
+			guy.ctx.scale(-1,1);
+			guy.ctx.translate(-5,0);}
 		guy.ctx.drawImage(image, 
 			currentFrame*frameWidth,0,
 			frameWidth,frameHeight,
-			-5,-22,
+			-5,-23,
 			15,22);
 		guy.ctx.setTransform(1,0,0,1,0,0);
 	};
