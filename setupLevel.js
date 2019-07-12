@@ -7,14 +7,18 @@ var levelScores={};
 var levels=[];
 
 
-document.getElementById("worldOneButton").onclick=function(){
-	
+function switchToPlay(){
 	for(e of document.getElementsByClassName("intro")){
 		e.style.display="none";
 	}
 	for(e of document.getElementsByName("playing")){
 		e.style.display="block";
 	}
+}
+
+document.getElementById("worldOneButton").onclick=function(){
+	
+	switchToPlay();
 	
 	levels = worldOne;
 	levelScores.worldOneScores = new Array(levels.length).fill(0);
@@ -25,12 +29,7 @@ document.getElementById("worldOneButton").onclick=function(){
 
 document.getElementById("worldTwoButton").onclick=function(){
 	
-	for(e of document.getElementsByClassName("intro")){
-		e.style.display="none";
-	}
-	for(e of document.getElementsByName("playing")){
-		e.style.display="block";
-	}
+	switchToPlay();
 	
 	levels = worldTwo;
 	levelScores.worldTwoScores = new Array(levels.length).fill(0);
@@ -41,12 +40,7 @@ document.getElementById("worldTwoButton").onclick=function(){
 
 document.getElementById("worldThreeButton").onclick=function(){
 	
-	for(e of document.getElementsByClassName("intro")){
-		e.style.display="none";
-	}
-	for(e of document.getElementsByName("playing")){
-		e.style.display="block";
-	}
+	switchToPlay();
 	
 	levels = worldThree;
 	levelScores.worldThreeScores = new Array(levels.length).fill(0);
@@ -59,12 +53,8 @@ document.getElementById("worldThreeButton").onclick=function(){
 
 
 document.getElementById("tutorialButton").onclick=function() {
-	for(e of document.getElementsByClassName("intro")){
-		e.style.display="none";
-	}
-	for(e of document.getElementsByName("playing")){
-		e.style.display="block";
-	}
+	
+	switchToPlay();
 	
 	levels = tutorial;
 	levelScores.tutorialScores = new Array(levels.length).fill(0);
@@ -85,7 +75,15 @@ function setup(level,world){
 	drawBackground(level,gravity);
 	document.getElementById("levelMessage").innerText=(level+1)+". "+levels[level].levelText;		
 	
-
+	document.getElementById("homeButton").onclick=function(){
+		for(e of document.getElementsByClassName("intro")){
+			e.style.display="block";
+		}
+		for(e of document.getElementsByName("playing")){
+			e.style.display="none";
+		}
+		clearInterval(a);
+	}
 	
 	document.getElementById("backOne").onclick=function(){
 		clearInterval(a);
@@ -156,6 +154,12 @@ function setup(level,world){
 			
 			solved=checkFlag(guy,level,gravity);
 			if(solved){
+				for(f of levels[level].floor){
+					if(f.type==button){
+						f.state=0;
+					}
+				}
+				
 				var congrats="Good job! "
 				var scoreAcheived=(Math.round(50-time+levels[level].score));
 				if(scoreAcheived>50){scoreAcheived=50;}

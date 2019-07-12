@@ -1,5 +1,5 @@
 tutorial = [
- { levelText: "TUTORIAL 1. Move to the goal. No jumping. The faster you complete the level, the more points you get!",
+ { levelText: "Move to the goal. No jumping. The faster you complete the level, the more points you get!",
    score: 2,
   	 floor: [{left:{x: 200, y: 225}, right: {x: 400, y: 225}, type: floor}
 	    ],
@@ -9,7 +9,7 @@ tutorial = [
 	    startx: 255,
 	    starty: 205},
 
- { levelText: "TUTORIAL 2. You can go up an incline.",
+ { levelText: "You can go up an incline.",
    score: 2,
    floor: [{left:{x: 195, y: 250}, right: {x: 295, y: 250}, type: floor},
      {left:{x: 294, y: 250}, right: {x: 345, y: 200}, type: floor},
@@ -20,7 +20,7 @@ tutorial = [
    buttons: [], portals: [],
    startx: 211,
    starty: 232},
- { levelText: "TUTORIAL 3. You can travel through a bridge.",
+ { levelText: "You can travel through a bridge.",
    score: 3,
    floor: [{left:{x: 210, y: 250}, right: {x: 310, y: 250}, type: floor},
      {left:{x: 309, y: 250}, right: {x: 360, y: 200}, type: floor},
@@ -33,7 +33,7 @@ tutorial = [
    buttons: [], portals: [],
    startx: 220,
    starty: 230},
- { levelText: "TUTORIAL 4. You can go through portals by pressing the up button.",
+ { levelText: "You can go through portals by pressing the up button.",
    score: 3,
    floor: [{left:{x: 205, y: 225}, right: {x: 285, y: 225}, type: floor},
      {left:{x: 315, y: 225}, right: {x: 395, y: 225}, type: floor}
@@ -44,7 +44,7 @@ tutorial = [
    ],
    startx: 215,
    starty: 205},
- { levelText: "TUTORIAL 5. You can flip the world upside down.",
+ { levelText: "You can flip the world upside down.",
    score: 4,
    floor: [{left:{x: 293, y: 275}, right: {x: 333, y: 275}, type: floor},
      {left:{x: 333, y: 275}, right: {x: 363, y: 275}, type: flip},
@@ -58,7 +58,7 @@ tutorial = [
    buttons: [], portals: [],
    startx: 298,
    starty: 265},
- { levelText: "TUTORIAL 6. Now you're ready for your first real level!",
+ { levelText: "Now you're ready for your first real level!",
    score: 8,
    floor: [{left:{x: 180, y: 295.5}, right: {x: 220, y: 295.5}, type: floor},
      {left:{x: 210, y: 275.5}, right: {x: 245, y: 275.5}, type: floor},
